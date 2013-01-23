@@ -1,0 +1,28 @@
+############################################################################
+#                                   菜单定义
+#############################################################################
+Colorset 20 fg Black, bg Gray,   hi Black, sh Black
+Colorset 21 fg White, bg #497eac,  hi Black, sh Green
+
+MenuStyle * MenuColorset 20, ActiveColorset 21
+MenuStyle * BorderWidth 1
+# necessary for transparency
+MenuStyle * Hilight3DOff, HilightBack
+MenuStyle * ItemFormat "%.2|%.5i%.5l%.5i%2.3>%2|"
+MenuStyle * TrianglesSolid, TrianglesUseFore
+MenuStyle * PopupOffset 0 100, PopupDelay 80
+MenuStyle * TitleUnderlines1
+MenuStyle * SeparatorsShort
+MenuStyle * Animation
+MenuStyle * VerticalItemSpacing 0 2, VerticalTitleSpacing 0 0
+
+Menustyle * Font "StringEncoding=utf-8:xft:Microsoft YaHei:Medium:Size=12:encoding=zh_CN.UTF-8"
+
+
+#DestroyMenu recreate MenuFvwmRoot
+DestroyMenu MenuFvwmRoot
+AddToMenu  "MenuFvwmRoot@macosx/menudebian.png@"
++ "%actions/menu.png%   菜单"   Exec exec notify-send "Menus of FVWM!"
++ "%actions/desktop.png% 显示桌面" All (AcceptsFocus CurrentPage !"xdaliclock" !Iconic !Shaded) Thumbnail
++ "" Nop
+

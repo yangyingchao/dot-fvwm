@@ -1,0 +1,266 @@
+# styles for fvwm modules.
+Style Fvwm* NoTitle,Sticky,BorderWidth 6, CirculateSkipIcon, CirculateSkip
+Style FvwmBanner  StaysOnTop
+Style FvwmForm  StaysOnTop
+
+############################### Pager #####################################
+DeskTopSize 1x1
+
+Colorset 40 fg #839eb0, bg #839eb0, hi black, sh #839eb0, RootTransparent buffer, Tint #4584b5 0
+Colorset 41 fg black, bg #e9b96e, hi green, sh yellow, RootTransparent buffer, Tint #4584b5 0
+
+Style FvwmPager NoTitle, Sticky, WindowListSkip, CirculateSkipIcon, CirculateSkip, BorderWidth 1, BorderColorset 5, NoHandles, NeverFocus, StaysOnBottom
+
+
+DestroyModuleConfig FvwmPager: *
+
+PipeRead `pos=$(($[vp.width]-365)); echo "*FvwmPager: Geometry +$pos+2"`
+*FvwmPager: Rows 				1
+*FvwmPager: Columns             4
+
+*FvwmPager: SolidSeparators
+*FvwmPager: BorderWidth     	1
+*FvwmPager: Colorset        	* 40
+*FvwmPager: HilightColorset 	* 41
+
+*FvwmPager: DesktopScale    	22
+*FvwmPager: MiniIcons
+*FvwmPager: MoveThreshold   	0
+*FvwmPager: NoShapeLabels
+*FvwmPager: SloppyFocus
+
+*FvwmPager: UseSkipList
+*FvwmPager: WindowBorderWidth 1
+*FvwmPager: WindowColorsets   40 41
+
+*FvwmPager: Font "StringEncoding=utf-8:xft:WenQuanYi Micro Hei:Medium:Size=12:encoding=zh_CN.UTF-8"
+*FvwmPager: SmallFont "StringEncoding=utf-8:xft:WenQuanYi Micro Hei:Medium:Size=12:encoding=zh_CN.UTF-8"
+
+*FvwmPagerLabel 0 Main
+*FvwmPagerLabel 1 Office
+*FvwmPagerLabel 2 Remo
+*FvwmPagerLabel 3 Others
+
+*FvwmPager: Balloons			All
+*FvwmPager: BalloonBorderWidth  1
+*FvwmPager: BalloonBack         #eff3ff
+*FvwmPager: BalloonBorderColor  #c7c7c7
+*FvwmPager: BalloonFore         Black
+*FvwmPager: BalloonYOffset		+2
+*FvwmPager: BalloonFont "StringEncoding=utf-8:xft:WenQuanYi Micro Hei:Medium:Size=12:encoding=zh_CN.UTF-8"
+
+
+
+# ################# FvwmEvents #######################################
+# DestroyModuleConfig FvwmEvent: *
+# *FvwmEvent: Cmd
+# *FvwmEvent: destroy_window FuncRestoreDesk
+# *FvwmEvent: add_window FuncStoreDesk
+
+################# WindowMenu Options ################################
+
+Colorset 71 fg black, bg black, sh black, RootTransparent Buffer, Tint #f6f6f6 0
+
+
+DestroyMenu MenuWindowOptions
+AddToMenu   MenuWindowOptions
++ "Send to%actions/send.png%" Popup FvwmSendto
++ "Move%actions/move.png%"  Move
++ "Resize%actions/resize.png%"  ResizeWarp
++ "Iconify%actions/iconify.png%"  Iconify
++ "Maximize%actions/maximize.png%" Maximize
++ "Shade%actions/shade.png%"  WindowShade
++ "(Un)Stick%actions/stick.png%"  Stick
++ "Ontop Layer%actions/ontop.png%" Layer 0 6
++ "Normal Layer%actions/nontop.png%" Layer 0 4
++ "" Nop
++ "Close%actions/close.png%"  Close
++ "Destroy%actions/destroy.png%"  Destroy
++ "" Nop
++ "Identify%actions/identify.png%"  Module FvwmIdent
+
+DestroyMenu FvwmSendTo
+AddToMenu FvwmSendTo
++ "Desktop 1%actions/desktop.png%" Pick MoveToDesk 0 0
++ "Desktop 2%actions/desktop.png%" Pick MoveToDesk 0 1
++ "Desktop 3%actions/desktop.png%" Pick MoveToDesk 0 2
++ "Desktop 4%actions/desktop.png%" Pick MoveToDesk 0 3
+
+
+#################
+# Use an arrow rather than the `X` cursor on the root window.
+#################
+SetEnv mycursors $[HOME]/.fvwm/cursors
+BusyCursor * False
+CursorStyle DEFAULT $[mycursors]/default/cursors/top_left_arrow
+CursorStyle ROOT $[mycursors]/default/cursors/left_ptr
+CursorStyle MENU $[mycursors]/default/cursors/hand
+CursorStyle WAIT $[mycursors]/default/cursors/watch
+CursorStyle BOTTOM_RIGHT  $[mycursors]/default/cursors/bottom_right_corner
+CursorStyle BOTTOM  $[mycursors]/default/cursors/bottom_side
+CursorStyle TOP  $[mycursors]/default/cursors/top_side
+CursorStyle MOVE  $[mycursors]/default/cursors/fleur
+CursorStyle TITLE  $[mycursors]/default/cursors/fleur
+CursorStyle RESIZE  $[mycursors]/default/cursors/fleur
+CursorStyle SYS  $[mycursors]/default/cursors/hand2
+CursorStyle RIGHT  $[mycursors]/default/cursors/right_side
+CursorStyle LEFT  $[mycursors]/default/cursors/left_side
+
+DestroyFunc RaiseAllWindow
+AddToFunc RaiseAllWindow
++ I WindowId $0 Raise
++ I Piperead `expr match "$[w.class]"  ".*ia" >/dev/null && echo "All (CurrentDesk, AcceptsFocus, !Transient) ThisWindow ($[w.class]) Raise"`
++ I WindowId $0 Focus
++ I WindowId $0 Raise
+
+DestroyFunc Maximize-or-Move
+AddToFunc Maximize-or-Move
++ D Maximize
++ C RaiseAllWindow
++ C Focus
++ M Move
+
+Mouse 0 1 A Menu MenuWindowOptions Close
+Mouse 0 2 A Close
+Mouse 0 4 A Maximize
+Mouse 0	6 A Iconify
+Mouse 1 I A DeThumbnail
+Mouse 1 R A Menu MenuFvwmRoot Nop
+Mouse 1 T A Maximize-or-Move
+Mouse 1 W M FuncMoveOrMaximize
+Mouse 3 R A WindowList NoGeometry
+
+
+
+############## Buttons
+Colorset 50 fg #ffffff, bg #4584b5, hi gray, sh gray, RootTransparent buffer, IconAlpha 75, Tint #4584b5 0
+Colorset 51 fg #ffffff, bg #7f7f7f, hi gray, sh gray, RootTransparent buffer, IconAlpha 100, Tint #4584b5 0
+
+Style FvwmButtons HandleWidth 2, NoHandles, FixedPosition, CirculateHit, \
+    NeverFocus, WindowListSkip, !Iconifiable, Fixedsize, NoTitle,\
+	StaysOnBottom, Sticky, CirculateSkipIcon, CirculateSkip
+
+
+DestroyModuleConfig FvwmDock: *
+*FvwmDock:  BoxSize     fixed
+*FvwmDock:  Colorset    50
+*FvwmDock:  Rows        5
+*FvwmDock:  Columns     52
+*FvwmDock:  Geometry    650x75+330-5
+*FvwmDock:  Padding     1 1
+*FvwmDock:  Frame       0
+*FvwmDock:  (5x7+1+0, ActionOnPress, \
+        Icon        dock/filemanager_48.png, \
+        ActiveIcon  dock/filemanager_64.png, \
+        Action(Mouse 1) `exec exec wcmd`)
+*FvwmDock:  (5x7+7+0, ActionOnPress, \
+        Icon        dock/chrome_48.png, \
+        ActiveIcon  dock/chrome_64.png, \
+        Action(Mouse 1) `exec exec google-chrome`
+*FvwmDock:  (5x7+13+0, ActionOnPress, \
+        Icon        dock/mail_48.png, \
+        ActiveIcon  dock/mail_64.png, \
+        Action(Mouse 1) `exec exec sylpheed`)
+*FvwmDock:  (5x7+19+0, ActionOnPress, \
+        Icon        dock/ooo_48.png, \
+        ActiveIcon  dock/ooo_64.png, \
+        Action(Mouse 1) `exec exec libreoffice`)
+*FvwmDock:  (5x7+25+0, ActionOnPress, \
+        Icon        dock/gimp_48.png, \
+        ActiveIcon  dock/gimp_64.png, \
+        Action(Mouse 1) `exec exec gimp`)
+*FvwmDock:  (5x7+31+0, ActionOnPress, \
+        Icon        dock/virtualbox_48.png, \
+        ActiveIcon  dock/virtualbox_64.png, \
+        Action(Mouse 1) `exec exec VirtualBox`)
+#*FvwmDock (5x7+37+0, Swallow(Respawn, NoHints) wmclock `Exec exec wmclock`)
+*FvwmDock: (5x7+37, Swallow(NoClose, UseOld) \
+          `stalonetray` `Exec exec stalonetray -p`)
+
+
+############################# Decor ##########################################
+
+DestroyDecor DefaultDecor
+AddToDecor DefaultDecor
++ TitleStyle Height 22
++ TitleStyle Centered
++ TitleStyle InActive ( Colorset 4 -- Flat ) Active ( Colorset 4 -- Flat )
++ BorderStyle  Flat HiddenHandles NoInset
+#+ BorderStyle Colorset 100 -- Flat HiddenHandles NoInset
+
++ AddTitleStyle Active (MultiPixmap \
+   Main  TiledPixmap decoration/title.png \
+   LeftEnd AdjustedPixmap decoration/title_left_end.png \
+   RightEnd AdjustedPixmap decoration/title_right_end.png)
+
++ AddTitleStyle Inactive (TiledPixmap decoration/title_inactive.png -- Flat )
+
++ ButtonStyle All InActive (TiledPixmap decoration/button_bg.png -- Flat )
++ ButtonStyle All Active (TiledPixmap decoration/button_bg.png -- Flat )
+
++ AddButtonStyle  1 AllActive (MiniIcon) AllInactive (MiniIcon)
++ AddButtonStyle  2 ActiveUp TiledPixmap decoration/close-active.png -- Flat
++ AddButtonStyle  2 ActiveDown TiledPixmap decoration/close-pressed.png -- Flat
++ AddButtonStyle  2 Inactive TiledPixmap decoration/close-inactive.png -- Flat
++ AddButtonStyle  4 ActiveUp TiledPixmap decoration/max-active.png -- Flat
++ AddButtonStyle  4 ActiveDown TiledPixmap decoration/max-pressed.png -- Flat
++ AddButtonStyle  4 Inactive TiledPixmap decoration/max-inactive.png -- Flat
++ AddButtonStyle  6 ActiveUp TiledPixmap decoration/min-active.png -- Flat
++ AddButtonStyle  6 ActiveDown TiledPixmap decoration/min-pressed.png -- Flat
++ AddButtonStyle  6 Inactive TiledPixmap decoration/min-inactive.png -- Flat
++ ButtonStyle All -- UseTitleStyle
++ ButtonStyle All -- flat
+
+Style DefaultStyle \
+      UseDecor DefaultDecor, HandleWidth 2, BorderWidth 2, \
+      ForeColor gray32, BackColor gray40, \
+      HilightFore gray80, HilightBack gray70,\
+      Font "StringEncoding=utf-8:xft:WenQuanYi Micro Hei:Normal:Size=9:encoding=zh_CN.UTF-8"
+
+Style * UseStyle DefaultStyle
+
+
+DestroyDecor TransDecor
+AddToDecor TransDecor
++ BorderStyle Colorset 100 -- Flat HiddenHandles NoInset
+Style TransStyle \
+      UseDecor TransDecor, HandleWidth 2, BorderWidth 2, \
+      ForeColor gray32, BackColor gray40, \
+      HilightFore white, HilightBack gray70,\
+      Font "StringEncoding=utf-8:xft:WenQuanYi Micro Hei:Normal:Size=9:encoding=zh_CN.UTF-8"
+
+Style Fvwm* UseStyle TransStyle
+Style FvwmForm UseStyle DefaultStyle
+
+
+# Specific Styles.
+
+Style trayer !Title, Sticky, WindowListSkip,!Handles,StaysOnBottom
+Style Trayer !Title, Sticky, WindowListSkip,!Handles,StaysOnBottom
+Style WMClock !Title, Sticky, WindowListSkip,!Handles,StaysOnBottom
+Style conky PositionPlacement 80 8
+Style xfreerdp !Title
+Style rdesktop !Title
+Style RemotePC NoTitle, Sticky, WindowListSkip, CirculateSkipIcon, CirculateSkip, BorderWidth 1, BorderColorset 5, NoHandles, NeverFocus, StaysOnBottom
+Style RemotePC PositionPlacement 80 52
+# Classified apps.
+Style emacs StartsOnDesk 0
+Style sakura StartsOnDesk 0
+
+# Office/Communicating Softwares
+Style Evolution StartsOnDesk 1
+Style Sylpheed StartsOnDesk 1
+Style Pidgin StartsOnDesk 1
+
+Style libreoffice-startcenter StartsOnDesk 1
+
+
+# Remote desktops & Entainments.
+Style rdesktop StartsOnDesk 2
+Style xfreerdp StartsOnDesk 2
+Style Remmina StartsOnDesk 2
+Style Audacious StartsOnDesk 2
+
+# Wined apps
+Style Wine StartsOnDesk 3
+Style VirtualBox StartsOnDesk 3

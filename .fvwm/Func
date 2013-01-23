@@ -1,0 +1,254 @@
+DestroyFunc GotoRightDesk
+AddToFunc   GotoRightDesk
++           I SetEnv fvwm_cur_desk $[desk.n]
++           I Test (EnvMatch fvwm_cur_desk 3) \
+            Piperead `echo SetEnv fvwm_cur_desk 0`
++           I TestRc (NoMatch)  \
+            Piperead `echo SetEnv fvwm_cur_desk $(( $[desk.n] + 1 ))`
++           I GotoDesk 0 $[fvwm_cur_desk]
++           I Current (CurrentPage,!backgroundxterm*) Break
++           I Prev (CurrentPage,AcceptsFocus) FlipFocus NoWarp
+
+Key Right A CM GotoRightDesk
+
+
+DestroyFunc GotoLeftDesk
+AddToFunc   GotoLeftDesk
++           I SetEnv fvwm_cur_desk $[desk.n]
++           I Test (EnvMatch fvwm_cur_desk 0) \
+            Piperead `echo SetEnv fvwm_cur_desk 3`
++           I TestRc (NoMatch)  \
+            Piperead `echo SetEnv fvwm_cur_desk $(( $[desk.n] - 1 ))`
++           I GotoDesk 0 $[fvwm_cur_desk]
++                       I Current (CurrentPage,!backgroundxterm*) Break
++                       I Prev (CurrentPage,AcceptsFocus) FlipFocus NoWarp
+
+Key Left A CM GotoLeftDesk
+
+DestroyFunc GotoFirstDesk
+AddToFunc   GotoFirstDesk
++           I GotoDesk 0 0
++           I SetEnv fvwm_cur_desk $[desk.n]
++           I Current (CurrentPage,!backgroundxterm*) Break
++           I Prev (CurrentPage,AcceptsFocus) FlipFocus NoWarp
+
+Key Up A CM GotoFirstDesk
+
+DestroyFunc GotoLastDesk
+AddToFunc   GotoLastDesk
++           I GotoDesk 0 3
++           I SetEnv fvwm_cur_desk $[desk.n]
++           I Current (CurrentPage,!backgroundxterm*) Break
++           I Prev (CurrentPage,AcceptsFocus) FlipFocus NoWarp
+
+Key Down A CM GotoLastDesk
+
+DestroyFunc             FuncFullScreen
+AddtoFunc               FuncFullScreen
++                       I Current (State 0) Fullscreen-Stop
++                       I TestRc Current (Maximizable) Fullscreen-Start
+
+Key F A 4 FuncFullScreen
+
+
+DestroyFunc		MyMoveDown
+AddToFunc       MyMoveDown
++               I Piperead ` echo Move "$[w.x]p w10"`
+
+Key Down A M MyMoveDown
+
+DestroyFunc		MyMoveUp
+AddToFunc       MyMoveUp
++               I Piperead ` echo Move "$[w.x]p w-10"`
+
+Key Up A M MyMoveUp
+
+DestroyFunc		MyMoveLeft
+AddToFunc       MyMoveLeft
++               I Piperead ` echo Move "w-10 $[w.y]p"`
+
+Key Left A M MyMoveLeft
+
+
+DestroyFunc		MyMoveRight
+AddToFunc       MyMoveRight
++               I Piperead ` echo Move "w10 $[w.y]p"`
+
+Key Right A M MyMoveRight
+
+
+
+
+DestroyFunc             Fullscreen-Start
+AddtoFunc               Fullscreen-Start
++                       I WindowStyle NoTitle,HandleWidth 0,FixedSize,FixedPosition
++                       I Current (!Maximized) Maximize
++                       I ResizeMaximize 100 100
++                       I State 0 true
+
+DestroyFunc             Fullscreen-Stop
+AddtoFunc               Fullscreen-Stop
++                       I DestroyWindowStyle
++                       I State 0 false
++                       I Maximize
+
+
+DestroyFunc             FuncFvwmIconifyTrue
+AddToFunc               FuncFvwmIconifyTrue
++                       I All (AcceptsFocus CurrentPage !Iconic !Shaded, !FvwmButtons, !"RemotePC*" !"wmclock" !"*Desk *" !"*Desk *" !"*FvwmDocker*") State 1
+
++                       I All (State 1) Iconify True
+
+DestroyFunc             FuncFvwmIconifFalse
+AddToFunc               FuncFvwmIconifyFalse
++                       I All (State 1) Iconify False
+
+DestroyFunc             FuncFvwmIconifyToggle
+AddToFunc               FuncFvwmIconifyToggle
++                       I FuncFvwmIconifyFalse
++                       I All (State 1) State 1 False
++                       I TestRc (NoMatch) FuncFvwmIconifyTrue
+
+Key D A 4 FuncFvwmIconifyToggle
+
+
+DestroyFunc             FuncShowDesktop
+AddToFunc               FuncShowDesktop
++                      I All (AcceptsFocus CurrentPage !Iconic !Shaded, \
+                             !FvwmButtons, !"wmclock" !"*Desk *" \
+                             !"*FvwmDocker*" !"RemotePC*" !"*sv*")Iconify
+
+Key D A CM FuncShowDesktop
+
+
+DestroyFunc             FuncShowWindowList
+AddToFunc               FuncShowWindowList
++                      I Windowlist (CurrentPage) NoDeskSort, SelectOnRelease, Meta_L,CurrentAtEnd, IconifiedAtEnd
+
+
+DestroyFunc             FuncRestoreDesk
+AddtoFunc               FuncRestoreDesk
++ I GotoDesk 0 $[fvwm_cur_desk]
+
+DestroyFunc             FuncStoreDesk
+AddtoFunc               FuncStoreDesk
++ I SetEnv fvwm_cur_desk $[desk.n]
++ I Exec exec notify-send "FuncStoreDesk: $[fvwm_cur_desk]"
+
+#################### Lock screen. ##############
+DestroyFunc             FuncFvwmLockScreen
+AddToFunc               FuncFvwmLockScreen
++                       I All (xscreensaver) Nop
++                       I TestRc (NoMatch) Exec xscreensaver -no-splash &
++                       I Exec xscreensaver-command -lock
+
+Key L A 4 FuncFvwmLockScreen
+Key L A CM FuncFvwmLockScreen
+
+
+# Set the specified wallpaper using available programs
+DestroyFunc Wallpaper-Set
+AddToFunc Wallpaper-Set
++ I Test (x habak) Exec habak -ms $*
++ I TestRc (False) Test (x Esetroot) Exec Esetroot -scale $*
++ I TestRc (False) Test (x hsetroot) Exec hsetroot -fill $*
++ I SavePreferences LastChoosenWallpaper "Wallpaper-Set \"$*\""
+
+DestroyFunc StartFunction
+AddToFunc   StartFunction
+# +           I Exec exec xcompmgr -cCfF -r7 -o.65 -l-10 -t-8 -D6 &
++           I Exec exec habak -ms $[HOME]/.fvwm/wallpapers/*
++           I Module FvwmAnimate
++           I Module FvwmAuto FvwmAutoHide -menter FvwmDockerAutoEnter
++           I Module FvwmButtons  FvwmDock
++           I Module FvwmPager 3 0
++           I Exec exec xscreensaver &
+#+           I Exec exec $[HOME]/.fvwm/tools/run_conky.sh $[vp.width]
++           I Exec exec fcitx
++           I Exec exec wicd-gtk -t
++           I Exec exec gnome-settings-daemon
++           I Module FvwmEvent
+#+           I Exec exec pidgin
+
+
+# fcitx and pidgin does not need to be killed: only one instance will be
+# created.
+DestroyFunc  ExitFunction
+AddToFunc    ExitFunction
++            I Exec exec kill -9 wmclock
++            I Exec exec killall -9 xcompmgr
++            I KillModule FvwmPager
++            I KillModule FvwmButtons
++            I KillModule FvwmAnimate
++            I KillModule FvwmAuto
+
+
+# make windowlists etc. warp pointer to the middle of
+# the window instead of top left
+AddToFunc               WindowListFunc
++                       I WarpToWindow 50 50
+
+DestroyFunc             DeThumbnail
+AddToFunc               DeThumbnail
++                       I Iconify off
++                       I DestroyWindowStyle
+
+DestroyFunc             FuncMoveOrMaximize
+AddToFunc               FuncMoveOrMaximize
++                       I Raise
++                       M Move
++                       D Maximize 100 100
+
+DestroyFunc             FuncDestroyOnHold
+AddToFunc               FuncDestroyOnHold
++                       C Schedule 100 Close
++                       H Destroy
++                       H Beep
+
+DestroyFunc             ExitMenu
+AddToFunc               ExitMenu
++                       I DestroyModuleConfig Exitmenu: *
++                       I *Exitmenu: Font "StringEncoding=utf-8:xft:WenQuanYi Micro Hei:Medium:Size=10:encoding=zh_CN.UTF-8"
++                       I *Exitmenu: ButtonFont "StringEncoding=utf-8:xft:WenQuanYi Micro Hei:Medium:Size=10:encoding=zh_CN.UTF-8"
++                       I *Exitmenu: Colorset 9
++                       I *Exitmenu: ItemColorset 9
++                       I *Exitmenu: Line center
++                       I *Exitmenu: Line center
++                       I *Exitmenu: Line center
++                       I *Exitmenu: Line center
++                       I *Exitmenu: Line center
++                       I *Exitmenu: Text "确认退出么？"
++                       I *Exitmenu: Line center
++                       I *Exitmenu: Line center
++                       I *Exitmenu: Line center
++                       I *Exitmenu: Line center
++                       I *Exitmenu: Line center
++                       I *Exitmenu: Line center
++                       I *Exitmenu: Line center
++                       I *Exitmenu: Button quit " 取消" ^[
++                       I *Exitmenu: Command Nop
++                       I *Exitmenu: Button quit " 重启" ^[
++                       I *Exitmenu: Command Exec sudo reboot
++                       I *Exitmenu: Button quit " 关机" ^[
++                       I *Exitmenu: Command Exec sudo halt
++                       I *Exitmenu: Line center
++                       I *Exitmenu: Button quit " 重载桌面" ^[
++                       I *Exitmenu: Command Restart
++                       I *Exitmenu: Button quit " 列出进程" ^[
++                       I *Exitmenu: Command Exec xterm  -fg green -bg black -e top
++                       I *Exitmenu: Button quit " 注销" ^[
++                       I *Exitmenu: Command Quit
++                       I *Exitmenu: Line center
++                       I *Exitmenu: Line center
++                       I Module FvwmForm Exitmenu
+Style                   "Exitmenu" NoTitle
+
+DestroyFunc             Thumbnail
+AddToFunc               Thumbnail
++                       I Raise
++                       I Iconify
+
+
+
+
+
