@@ -1,6 +1,6 @@
 WindowTitle {FvwmApplet-DigitalClock}
 WindowSize  200 20		# Taille
-Font "StringEncoding=utf-8:xft:Microsoft YaHei:Medium:Size=8:encoding=zh_CN.UTF-8"
+Font "StringEncoding=utf-8:xft:WenQUanYi Micro Hei:Medium:Size=8:encoding=zh_CN.UTF-8"
 
 Init
  Begin

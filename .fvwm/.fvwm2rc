@@ -16,7 +16,7 @@ SetEnv fvwm_script $[HOME]/.fvwm/scripts
 SetEnv fvwm_color $[HOME]/.fvwm/icons/colors/
 
 
-DefaultFont "StringEncoding=utf-8:xft:Microsoft YaHei:size=10:encoding=zh_CN.UTF-8"
+DefaultFont "StringEncoding=utf-8:xft:WenQuanYi Micro Hei:size=10:encoding=zh_CN.UTF-8"
 DefaultColorset 0
 
 ###########################################################
@@ -52,8 +52,8 @@ Style * ClickToFocus, MouseFocusClickRaises
 IgnoreModifiers L25
 ColormapFocus FollowsMouse
 
-Style * Font "StringEncoding=utf-8:xft:Microsoft YaHei:Medium:Size=12:encoding=zh_CN.UTF-8"
-IconFont "StringEncoding=utf-8:xft:Microsoft YaHei:Medium:Size=12:encoding=zh_CN.UTF-8"
+Style * Font "StringEncoding=utf-8:xft:WenQuanYi Micro Hei:Medium:Size=12:encoding=zh_CN.UTF-8"
+IconFont "StringEncoding=utf-8:xft:WenQuanYi Micro Hei:Medium:Size=12:encoding=zh_CN.UTF-8"
 
 
 EdgeCommand Top OnTopEdge $[pointer.x] $[pointer.y]
