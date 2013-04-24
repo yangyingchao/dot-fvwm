@@ -154,9 +154,9 @@ DestroyModuleConfig FvwmDock: *
         ActiveIcon  dock/filemanager_64.png, \
         Action(Mouse 1) `exec exec wcmd`)
 *FvwmDock:  (5x7+7+0, ActionOnPress, \
-        Icon        dock/chrome_48.png, \
-        ActiveIcon  dock/chrome_64.png, \
-        Action(Mouse 1) `exec exec google-chrome`
+        Icon        dock/firefox_48.png, \
+        ActiveIcon  dock/firefox_64.png, \
+        Action(Mouse 1) `exec exec firefox`
 *FvwmDock:  (5x7+13+0, ActionOnPress, \
         Icon        dock/mail_48.png, \
         ActiveIcon  dock/mail_64.png, \
@@ -173,10 +173,8 @@ DestroyModuleConfig FvwmDock: *
         Icon        dock/virtualbox_48.png, \
         ActiveIcon  dock/virtualbox_64.png, \
         Action(Mouse 1) `exec exec VirtualBox`)
-#*FvwmDock (5x7+37+0, Swallow(Respawn, NoHints) wmclock `Exec exec wmclock`)
-*FvwmDock: (5x7+37, Swallow(NoClose, UseOld) \
-          `stalonetray` `Exec exec stalonetray -p`)
-
+*FvwmDock (5x7+37+0, Swallow(Respawn, NoHints) wmclock `Exec exec wmclock`)
+*FvwmDock: (5x7+44, Swallow(NoClose, UseOld) stalonetray `Exec exec stalonetray --geometry 5x1+0-0 -p`)
 
 ############################# Decor ##########################################
 
