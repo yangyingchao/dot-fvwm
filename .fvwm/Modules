@@ -180,7 +180,7 @@ DestroyModuleConfig FvwmDock: *
 
 DestroyDecor DefaultDecor
 AddToDecor DefaultDecor
-+ TitleStyle Height 22
++ TitleStyle Height 18
 + TitleStyle Centered
 + TitleStyle InActive ( Colorset 4 -- Flat ) Active ( Colorset 4 -- Flat )
 + BorderStyle  Flat HiddenHandles NoInset
