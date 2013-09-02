@@ -54,7 +54,13 @@ class ImageCollection:
             icon_path = icon_fallback
         icon_out = ""
         if icon_path:
+            pos = name.rfind(".")
+            if pos != -1:
+                name = name[:pos] + ".png"
+            else:
+                name += ".png"
             icon_out = os.path.join(fvwm_icon_home, name)
+            print icon_out
             os.system('convert -background none -resize 24x24 "%s" "%s"'%(
                 icon_path, icon_out))
 
@@ -67,7 +73,8 @@ class ImageCollection:
             idx = size - 1 -i;
             fn = filenames[idx]
             if fn.find("16") != -1 or fn.find("22") != -1 or \
-               fn.find("32") != -1 or fn.find("24") != -1:
+               fn.find("32") != -1 or fn.find("24") != -1 or \
+               fn == "scalable":
                 filenames.pop(idx);
                 continue
 
