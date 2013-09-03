@@ -28,7 +28,7 @@ class ImageCollection:
         for path in paths:
             if os.path.islink(path):
                 path = os.path.abspath(path)
-                os.path.walk(path, self._collect, None)
+            os.path.walk(path, self._collect, None)
         print "Finished icon collection, size: ", len(self.img_data)
 
     def PrepareIcon(self, name, isCat=False):
@@ -44,6 +44,8 @@ class ImageCollection:
             name = "applications-%s"%name
 
         bname = os.path.basename(name)
+        if "cxmenu-" in name:
+            name = name[name.rfind("-")+1:]
         icon_path = ""
         pos = bname.rfind(".")
         if pos != -1:
@@ -60,7 +62,6 @@ class ImageCollection:
             else:
                 name += ".png"
             icon_out = os.path.join(fvwm_icon_home, name)
-            print icon_out
             os.system('convert -background none -resize 24x24 "%s" "%s"'%(
                 icon_path, icon_out))
 
@@ -86,7 +87,8 @@ class ImageCollection:
             self.img_data[key] = path
 
 g_iconBase = ImageCollection(["/usr/share/pixmaps", "/usr/share/icons/hicolor",
-                              os.path.join(USER_HOME, ".icons/default")])
+                              os.path.join(USER_HOME, ".icons/default"),
+                              os.path.join(USER_HOME, ".fvwm/icons/collection")])
 
 def SimpleRead(fn):
     """
@@ -144,7 +146,8 @@ class DesktopEntry:
         # Optional
         self.terminal = False
 
-        self.IsValid = True
+        self.IsValid  = True
+        self.InVisiable = True
 
         self._parse(path)
 
@@ -163,6 +166,10 @@ class DesktopEntry:
             if len(kvp) == 2:
                 tmp_dic[kvp[0]] = kvp[1]
 
+        self.InVisiable = tmp_dic.get("NoDisplay")
+        if self.InVisiable:
+            return
+
         self.Icon = tmp_dic.get("Icon")
         self.Name = tmp_dic.get("Name")
         self.Exec = tmp_dic.get("Exec")
@@ -170,8 +177,12 @@ class DesktopEntry:
         if self.Name is None or self.Exec is None:
             self.IsValid = False
             return
+        elif self.Name in ["sandbox"]:
+            self.InVisiable = True
+            return
 
-        self.Exec = self.Exec[:self.Exec.rfind("%")]
+        if self.Exec.rfind("%") != -1:
+            self.Exec = self.Exec[:self.Exec.rfind("%")]
 
         # Update self.Category if necessary
         self.Category = tmp_dic.get("Categories")
@@ -189,6 +200,12 @@ class DesktopEntry:
             self.Category = "Wine"
         elif "Develop" in self.Category:
             self.Category = "Development"
+        elif "Setting" in self.Category:
+            self.Category = "System"
+        elif "Office" in self.Category:
+            self.Category = "Office"
+        elif "Utility" in self.Category:
+            self.Category = "utilities"
         else:
             self.Category = self.Category.split(";")[0]
 
@@ -248,6 +265,10 @@ class FvwmMenuFactory:
         if not de.IsValid:
             print("File %s path is not valid!\n"%path)
             return
+        if de.InVisiable:
+            print("File :%s is invisible.\n"%path)
+            return
+
 
         cat = self.cats.get(de.Category)
         if cat is None:

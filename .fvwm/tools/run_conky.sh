@@ -11,7 +11,7 @@ notify-send "Starting conky!"
 cpu_num=`cat /proc/cpuinfo | grep processor | wc -l`
 if [ $cpu_num -gt 1 ]; then
     cat $HOME/.fvwm/tools/conky_head.tpl > $HOME/.conkyrc
-    x_pos=$(($1-250))
+    x_pos=$(($1-300))
     echo "gap_x $x_pos" >> $HOME/.conkyrc
     cat  $HOME/.fvwm/tools/conky_text.tpl >> $HOME/.conkyrc
     /usr/bin/conky -d
