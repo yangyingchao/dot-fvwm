@@ -31,9 +31,9 @@ APP="rdesktop"
 TARGETS = []
 
 t1 = { };
-t1["ip"] = "10.190.40.62"
-t1["username"] = "administrator"
-t1["passwd"]  = "itcss2-1"
+t1["ip"] = ""
+t1["username"] = ""
+t1["passwd"]  = ""
 
 TARGETS.append(t1)
 
