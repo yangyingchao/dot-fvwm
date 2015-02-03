@@ -206,6 +206,10 @@ class DesktopEntry:
             self.Category = "Office"
         elif "Utility" in self.Category:
             self.Category = "utilities"
+        elif "Network" in self.Category:
+            self.Category = "network"
+        elif "System" in self.Category:
+            self.Category = "system"
         else:
             self.Category = self.Category.split(";")[0]
 
