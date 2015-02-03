@@ -164,7 +164,8 @@ DestroyModuleConfig FvwmDock: *
 *FvwmDock:  (5x7+19+0, ActionOnPress, \
         Icon        dock/wps_48.png, \
         ActiveIcon  dock/wps_64.png, \
-        Action(Mouse 1) `exec exec wps`)
+        Action(Mouse 1) `exec exec wps`,
+        Action(Mouse 3) `exec exec wpp`)
 *FvwmDock:  (5x7+25+0, ActionOnPress, \
         Icon        dock/gimp_48.png, \
         ActiveIcon  dock/gimp_64.png, \
@@ -180,37 +181,37 @@ DestroyModuleConfig FvwmDock: *
 
 DestroyDecor DefaultDecor
 AddToDecor DefaultDecor
-+ TitleStyle Height 18
++ TitleStyle Height 22
 + TitleStyle Centered
 + TitleStyle InActive ( Colorset 4 -- Flat ) Active ( Colorset 4 -- Flat )
 + BorderStyle  Flat HiddenHandles NoInset
 #+ BorderStyle Colorset 100 -- Flat HiddenHandles NoInset
 
-+ AddTitleStyle Active (MultiPixmap \
-   Main  TiledPixmap decoration/title.png \
-   LeftEnd AdjustedPixmap decoration/title_left_end.png \
-   RightEnd AdjustedPixmap decoration/title_right_end.png)
++ AddTitleStyle Active (Solid #444851)
++ AddTitleStyle Inactive (Solid #444851)
 
-+ AddTitleStyle Inactive (TiledPixmap decoration/title_inactive.png -- Flat )
-
-+ ButtonStyle All InActive (TiledPixmap decoration/button_bg.png -- Flat )
-+ ButtonStyle All Active (TiledPixmap decoration/button_bg.png -- Flat )
++ ButtonStyle All InActive (TiledPixmap decoration/btn_bg.png -- Flat )
++ ButtonStyle All Active (TiledPixmap decoration/btn_bg.png -- Flat )
 
 + AddButtonStyle  1 AllActive (MiniIcon) AllInactive (MiniIcon)
-+ AddButtonStyle  2 ActiveUp TiledPixmap decoration/close-active.png -- Flat
-+ AddButtonStyle  2 ActiveDown TiledPixmap decoration/close-pressed.png -- Flat
+
++ AddButtonStyle  2 ActiveUp TiledPixmap decoration/close.png -- Flat
++ AddButtonStyle  2 ActiveDown TiledPixmap decoration/close.png -- Flat
 + AddButtonStyle  2 Inactive TiledPixmap decoration/close-inactive.png -- Flat
-+ AddButtonStyle  4 ActiveUp TiledPixmap decoration/max-active.png -- Flat
-+ AddButtonStyle  4 ActiveDown TiledPixmap decoration/max-pressed.png -- Flat
+
++ AddButtonStyle  4 ActiveUp TiledPixmap decoration/max.png -- Flat
++ AddButtonStyle  4 ActiveDown TiledPixmap decoration/max.png -- Flat
 + AddButtonStyle  4 Inactive TiledPixmap decoration/max-inactive.png -- Flat
-+ AddButtonStyle  6 ActiveUp TiledPixmap decoration/min-active.png -- Flat
-+ AddButtonStyle  6 ActiveDown TiledPixmap decoration/min-pressed.png -- Flat
+
++ AddButtonStyle  6 ActiveUp TiledPixmap decoration/min.png -- Flat
++ AddButtonStyle  6 ActiveDown TiledPixmap decoration/min.png -- Flat
 + AddButtonStyle  6 Inactive TiledPixmap decoration/min-inactive.png -- Flat
+
 + ButtonStyle All -- UseTitleStyle
 + ButtonStyle All -- flat
 
 Style DefaultStyle \
-      UseDecor DefaultDecor, HandleWidth 2, BorderWidth 2, \
+      UseDecor DefaultDecor, HandleWidth 0, BorderWidth 0, \
       ForeColor gray32, BackColor gray40, \
       HilightFore gray80, HilightBack gray70,\
       Font "StringEncoding=utf-8:xft:WenQuanYi Micro Hei:Normal:Size=9:encoding=zh_CN.UTF-8"

@@ -166,7 +166,6 @@ Style * TileCascadePlacement
 Style * VariablePPosition
 Style * WindowShadeSteps 20
 style * ResizeHintOverride
-Style * BorderWidth 1, HandleWidth 1
 
 *FvwmAnimate: Effect None
 
