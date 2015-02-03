@@ -22,8 +22,9 @@ Key F12 A C Exec emacs
 Key F2 A M Exec exec grun
 Key F4 A M Close
 
-Key Tab A M WindowList (CurrentPage) Root c c NoDeskSort, SelectOnRelease Meta_L,CurrentAtEnd, IconifiedAtEnd
-Key Tab A 4 WindowList (CurrentPage) Root c c NoDeskSort, SelectOnRelease Meta_L,CurrentAtEnd, IconifiedAtEnd
+Key Tab A M WindowList (CurrentPage) Root c c NoDeskSort, SelectOnRelease Alt_L,CurrentAtEnd, IconifiedAtEnd
+Key Tab A 4 WindowList (CurrentPage) Root c c NoDeskSort, SelectOnRelease Alt_L,CurrentAtEnd, IconifiedAtEnd
+
 
 Key r A CM Exec exec grun
 Key t A MC Exec urxvt -pe tabbed
