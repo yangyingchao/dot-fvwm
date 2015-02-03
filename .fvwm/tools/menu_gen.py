@@ -56,12 +56,12 @@ class ImageCollection:
             icon_path = icon_fallback
         icon_out = ""
         if icon_path:
-            pos = name.rfind(".")
+            pos = bname.rfind(".")
             if pos != -1:
-                name = name[:pos] + ".png"
+                bname = bname[:pos] + ".png"
             else:
-                name += ".png"
-            icon_out = os.path.join(fvwm_icon_home, name)
+                bname += ".png"
+            icon_out = os.path.join(fvwm_icon_home, bname)
             os.system('convert -background none -resize 24x24 "%s" "%s"'%(
                 icon_path, icon_out))
 
