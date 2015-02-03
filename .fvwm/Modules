@@ -152,19 +152,19 @@ DestroyModuleConfig FvwmDock: *
 *FvwmDock:  (5x7+1+0, ActionOnPress, \
         Icon        dock/filemanager_48.png, \
         ActiveIcon  dock/filemanager_64.png, \
-        Action(Mouse 1) `exec exec wcmd`)
+        Action(Mouse 1) `exec exec pcmanfm`)
 *FvwmDock:  (5x7+7+0, ActionOnPress, \
         Icon        dock/chrome_48.png, \
         ActiveIcon  dock/chrome_64.png, \
         Action(Mouse 1) `exec exec google-chrome-stable`
 *FvwmDock:  (5x7+13+0, ActionOnPress, \
-        Icon        dock/mail_48.png, \
-        ActiveIcon  dock/mail_64.png, \
-        Action(Mouse 1) `exec exec sylpheed`)
+        Icon        dock/p4_48.png, \
+        ActiveIcon  dock/p4_64.png, \
+        Action(Mouse 1) `exec exec /opt/p4v/bin/p4v`)
 *FvwmDock:  (5x7+19+0, ActionOnPress, \
-        Icon        dock/ooo_48.png, \
-        ActiveIcon  dock/ooo_64.png, \
-        Action(Mouse 1) `exec exec libreoffice`)
+        Icon        dock/wps_48.png, \
+        ActiveIcon  dock/wps_64.png, \
+        Action(Mouse 1) `exec exec wps`)
 *FvwmDock:  (5x7+25+0, ActionOnPress, \
         Icon        dock/gimp_48.png, \
         ActiveIcon  dock/gimp_64.png, \
