@@ -1,0 +1,1 @@
+fvwm habak xcompmgr lxterminal urxvtwmclock stalonetray grun

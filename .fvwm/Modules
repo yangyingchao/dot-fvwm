@@ -38,8 +38,8 @@ PipeRead `pos=$(($[vp.width]-365)); echo "*FvwmPager: Geometry +$pos+2"`
 
 *FvwmPagerLabel 0 Main
 *FvwmPagerLabel 1 Office
-*FvwmPagerLabel 2 Remo
-*FvwmPagerLabel 3 Others
+*FvwmPagerLabel 2 Others
+*FvwmPagerLabel 3 Remo
 
 *FvwmPager: Balloons			All
 *FvwmPager: BalloonBorderWidth  1
@@ -245,20 +245,22 @@ Style RemotePC PositionPlacement 80 52
 Style emacs StartsOnDesk 0
 Style sakura StartsOnDesk 0
 
+Style Pidgin StartsOnDesk 0
+
 # Office/Communicating Softwares
 Style Evolution StartsOnDesk 1
 Style Sylpheed StartsOnDesk 1
-Style Pidgin StartsOnDesk 1
 
 Style libreoffice-startcenter StartsOnDesk 1
 
 
-# Remote desktops & Entainments.
-Style rdesktop StartsOnDesk 2
-Style xfreerdp StartsOnDesk 2
-Style Remmina StartsOnDesk 2
+# Wined apps
+Style Wine StartsOnDesk 2
+Style VirtualBox StartsOnDesk 2
 Style Audacious StartsOnDesk 2
 
-# Wined apps
-Style Wine StartsOnDesk 3
-Style VirtualBox StartsOnDesk 3
+# Remote desktops & Entainments.
+Style rdesktop StartsOnDesk 3
+Style xfreerdp StartsOnDesk 3
+Style Remmina StartsOnDesk 3
+

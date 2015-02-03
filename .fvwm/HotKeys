@@ -1,4 +1,4 @@
-############## root window #######3
+############## root window #######
 # Pager
 Key 1 A 4 MoveToDesk 0 0
 Key 2 A 4 MoveToDesk 0 1
@@ -27,7 +27,7 @@ Key Tab A 4 WindowList (CurrentPage) Root c c NoDeskSort, SelectOnRelease Alt_L,
 
 
 Key r A CM Exec exec grun
-Key t A MC Exec urxvt -pe tabbed
+Key t A MC Exec lxterminal
 
 #### Screenshots
 
