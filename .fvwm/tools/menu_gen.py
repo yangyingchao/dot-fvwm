@@ -32,6 +32,8 @@ class ImageCollection:
         print "Finished icon collection, size: ", len(self.img_data)
 
     def PrepareIcon(self, name, isCat=False):
+        if name is None:
+            return ""
         icon_fallback = ""
         if os.access(name, os.F_OK): # Input is the absloute path of file.
             icon_fallback = name;
@@ -171,8 +173,10 @@ class DesktopEntry:
             return
 
         self.Icon = tmp_dic.get("Icon")
-        self.Name = tmp_dic.get("Name")
+        tname = tmp_dic.get("Name")
+        self.Name = tname[0].upper() + tname[1:];
         self.Exec = tmp_dic.get("Exec")
+
 
         if self.Name is None or self.Exec is None:
             self.IsValid = False
@@ -192,8 +196,9 @@ class DesktopEntry:
         if self.Category is None:
             self.Category = "Other"
 
-        if (mimes is not None) and ("audio" in mimes or "video" in mimes):
-            self.Category = "AudioVideo"
+        if (mimes is not None) and \
+           ("audio" in mimes or "video" in mimes or "image/" in mimes):
+            self.Category = "MultiMedia"
         elif "Windows" in self.Name or "Microsoft" in self.Name or \
              "cxoffice" in self.Name or "cxmenu" in self.Category or \
              "cross"    in self.Name.lower():
@@ -205,14 +210,16 @@ class DesktopEntry:
         elif "Office" in self.Category:
             self.Category = "Office"
         elif "Utility" in self.Category:
-            self.Category = "utilities"
+            self.Category = "Utilities"
         elif "Network" in self.Category:
-            self.Category = "network"
+            self.Category = "Network"
         elif "System" in self.Category:
-            self.Category = "system"
+            self.Category = "System"
         else:
             self.Category = self.Category.split(";")[0]
 
+    def __hash__(self):
+        return self.Name.__hash__();
 
     def SerializeToString(self):
         """
@@ -273,7 +280,6 @@ class FvwmMenuFactory:
             print("File :%s is invisible.\n"%path)
             return
 
-
         cat = self.cats.get(de.Category)
         if cat is None:
             cat = DE_Category(de.Category)
@@ -283,7 +289,10 @@ class FvwmMenuFactory:
     def OutputToFile(self, of=os.path.join(FVWM_HOME, "Menu")):
         output   = SimpleRead(menu_template_head)
         submenus = []
-        for cat in self.cats.values():
+        keys = self.cats.keys();
+        keys.sort()
+        for key in keys:
+            cat = self.cats.get(key)
             content = cat.SerializeToString()
             output += content[0]
             submenus.append(content[1])
