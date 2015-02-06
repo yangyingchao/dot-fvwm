@@ -150,12 +150,17 @@ class DesktopEntry:
 
         self.IsValid  = True
         self.InVisiable = True
-
+        self.path = path;
         self._parse(path)
 
     def _parse(self, path):
         """
         """
+        if path.startswith('userapp-') or \
+           '-usercreated-' in path:
+            self.InVisiable = True
+            return
+
         content = SimpleRead(path)
         if "Desktop Entry" not in content:
             self.IsValid = False
@@ -195,14 +200,6 @@ class DesktopEntry:
     def _updateCategory(self, mimes):
         if self.Category is None:
             self.Category = "Other"
-
-        if (mimes is not None) and \
-           ("audio" in mimes or "video" in mimes or "image/" in mimes):
-            self.Category = "MultiMedia"
-        elif "Windows" in self.Name or "Microsoft" in self.Name or \
-             "cxoffice" in self.Name or "cxmenu" in self.Category or \
-             "cross"    in self.Name.lower():
-            self.Category = "Wine"
         elif "Develop" in self.Category:
             self.Category = "Development"
         elif "Setting" in self.Category:
@@ -215,8 +212,17 @@ class DesktopEntry:
             self.Category = "Network"
         elif "System" in self.Category:
             self.Category = "System"
+        elif (mimes is not None) and \
+             ("audio" in mimes or "video" in mimes or "image/" in mimes):
+            self.Category = "MultiMedia"
+        elif "Windows" in self.Name or "Microsoft" in self.Name or \
+             "cxoffice" in self.Name or "cxmenu" in self.Category or \
+             "cross"    in self.Name.lower():
+            self.Category = "Wine"
         else:
             self.Category = self.Category.split(";")[0]
+        print "Name: %s, Category: %s, path: %s" %(self.Name, self.Category,
+                                                   self.path)
 
     def __hash__(self):
         return self.Name.__hash__();
