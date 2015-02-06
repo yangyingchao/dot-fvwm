@@ -75,8 +75,8 @@ class ImageCollection:
         for i in range(size):
             idx = size - 1 -i;
             fn = filenames[idx]
-            if fn.find("16") != -1 or fn.find("22") != -1 or \
-               fn.find("32") != -1 or fn.find("24") != -1 or \
+            if fn.find("16/") != -1 or fn.find("22/") != -1 or \
+               fn.find("32/") != -1 or fn.find("24/") != -1 or \
                fn == "scalable":
                 filenames.pop(idx);
                 continue
