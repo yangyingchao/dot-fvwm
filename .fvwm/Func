@@ -156,7 +156,7 @@ AddToFunc Wallpaper-Set
 
 DestroyFunc StartFunction
 AddToFunc   StartFunction
-+           I Exec exec xcompmgr  -c -C -t-5 -l-5 -r4.2 -o.55 &
++           I Exec exec xcompmgr xcompmgr -c -C -r7 -l-10 -t-10 -o.75 &
 +           I Exec exec habak -ms $[HOME]/.fvwm/wallpapers/*
 +           I Module FvwmAnimate
 +           I Module FvwmAuto FvwmAutoHide -menter FvwmDockerAutoEnter
@@ -185,12 +185,10 @@ AddToFunc    ExitFunction
 # make windowlists etc. warp pointer to the middle of
 # the window instead of top left
 AddToFunc               WindowListFunc
-+                       I WarpToWindow 50 50
-
-DestroyFunc             DeThumbnail
-AddToFunc               DeThumbnail
-+                       I Iconify off
-+                       I DestroyWindowStyle
++ I Iconify off
++ I FlipFocus
++ I Raise
++ I WarpToWindow 50 50
 
 DestroyFunc             FuncMoveOrMaximize
 AddToFunc               FuncMoveOrMaximize
@@ -242,12 +240,19 @@ AddToFunc               ExitMenu
 +                       I Module FvwmForm Exitmenu
 Style                   "Exitmenu" NoTitle
 
-DestroyFunc             Thumbnail
-AddToFunc               Thumbnail
-+                       I Raise
-+                       I Iconify
+DestroyFunc Thumbnail
+AddToFunc Thumbnail
+	+ I ThisWindow (Shaded) WindowShade
+	+ I PipeRead 'bash $[fvwm_script]/thumbnail-create "$[w.id]" "/tmp"'
+
+DestroyFunc DeThumbnail
+AddToFunc DeThumbnail
+	+ I PipeRead 'bash $[fvwm_script]/thumbnail-destroy "$[w.id]" "/tmp"'
+    + I Iconify off
+    + I DestroyWindowStyle
 
 
+*FvwmEvent: deiconify DeThumbnail
 
 
 

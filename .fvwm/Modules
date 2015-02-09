@@ -123,7 +123,7 @@ AddToFunc Maximize-or-Move
 Mouse 0 1 A Menu MenuWindowOptions Close
 Mouse 0 2 A Close
 Mouse 0 4 A Maximize
-Mouse 0	6 A Iconify
+Mouse 0	6 A Thumbnail
 Mouse 1 I A DeThumbnail
 Mouse 1 R A Menu MenuFvwmRoot Nop
 Mouse 1 T A Maximize-or-Move
@@ -162,10 +162,9 @@ DestroyModuleConfig FvwmDock: *
         ActiveIcon  dock/p4_64.png, \
         Action(Mouse 1) `exec exec /opt/p4v/bin/p4v`)
 *FvwmDock:  (5x7+19+0, ActionOnPress, \
-        Icon        dock/wps_48.png, \
-        ActiveIcon  dock/wps_64.png, \
-        Action(Mouse 1) `exec exec wps`,
-        Action(Mouse 3) `exec exec wpp`)
+        Icon        dock/ooo_48.png, \
+        ActiveIcon  dock/ooo_64.png, \
+        Action(Mouse 1) `exec exec libreoffice`)
 *FvwmDock:  (5x7+25+0, ActionOnPress, \
         Icon        dock/gimp_48.png, \
         ActiveIcon  dock/gimp_64.png, \
