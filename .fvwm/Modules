@@ -145,8 +145,8 @@ DestroyModuleConfig FvwmDock: *
 *FvwmDock:  BoxSize     fixed
 *FvwmDock:  Colorset    50
 *FvwmDock:  Rows        5
-*FvwmDock:  Columns     52
-*FvwmDock:  Geometry    650x75+330-5
+*FvwmDock:  Columns     60
+*FvwmDock:  Geometry    850x75+350-0
 *FvwmDock:  Padding     1 1
 *FvwmDock:  Frame       0
 *FvwmDock:  (5x7+1+0, ActionOnPress, \
@@ -174,7 +174,8 @@ DestroyModuleConfig FvwmDock: *
         ActiveIcon  dock/virtualbox_64.png, \
         Action(Mouse 1) `exec exec VirtualBox`)
 *FvwmDock (5x7+37+0, Swallow(Respawn, NoHints) wmclock `Exec exec wmclock`)
-*FvwmDock: (5x7+44, Swallow(NoClose, UseOld) stalonetray `Exec exec stalonetray --geometry 5x1+0-0 -p`)
+*FvwmDock: (5x7+44, Swallow(NoClose, UseOld) stalonetray `Exec exec stalonetray --geometry 4x1+0-0 -p`)
+
 
 ############################# Decor ##########################################
 
@@ -246,13 +247,6 @@ Style emacs StartsOnDesk 0
 Style sakura StartsOnDesk 0
 
 Style Pidgin StartsOnDesk 0
-
-# Office/Communicating Softwares
-Style Evolution StartsOnDesk 1
-Style Sylpheed StartsOnDesk 1
-
-Style libreoffice-startcenter StartsOnDesk 1
-
 
 # Wined apps
 Style Wine StartsOnDesk 2

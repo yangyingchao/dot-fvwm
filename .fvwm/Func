@@ -162,12 +162,13 @@ AddToFunc   StartFunction
 +           I Module FvwmAuto FvwmAutoHide -menter FvwmDockerAutoEnter
 +           I Module FvwmButtons  FvwmDock
 +           I Module FvwmPager 3 0
-# +           I Exec exec xscreensaver &
 +           I Exec exec $[HOME]/.fvwm/tools/run_conky.sh $[vp.width]
 +           I Exec exec fcitx &
-# +           I Exec exec wicd-gtk -t
 +           I Module FvwmEvent
 +           I Exec exec pidgin
++           I Exec exec udiskie --tray &
+# +           I Exec exec xscreensaver &
+# +           I Exec exec wicd-gtk -t
 
 
 # fcitx and pidgin does not need to be killed: only one instance will be
@@ -176,6 +177,7 @@ DestroyFunc  ExitFunction
 AddToFunc    ExitFunction
 +            I Exec exec kill -9 wmclock
 +            I Exec exec killall -9 xcompmgr
++            I Exec exec killall -9 udiskie
 +            I KillModule FvwmPager
 +            I KillModule FvwmButtons
 +            I KillModule FvwmAnimate
