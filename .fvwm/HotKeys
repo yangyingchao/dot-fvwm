@@ -11,19 +11,18 @@ Key space A 4 Maximize
 Key space A M Iconify
 Key F1 A 4 Exec pcmanfm
 Key F2 A 4 Exec devhelp
-Key F3 A 4 Exec goldendict
 Key F8 A 4 Module FvwmConsole
 Key F11 A 4 Exec firefox-bin
 Key F12 A 4 Exec google-chrome-stable
 Key F10 A 4 Exec python ~/.fvwm/scripts/rdesk.py || notify-send "Failed to execute rdsk.py"
 
 Key F1 A M Menu MenuFvwmRoot
-Key F12 A C Exec emacs
 Key F2 A M Exec exec grun
+Key F3 A 4 Module FvwmConsole
 Key F4 A M Close
 
 Key Tab A M WindowList (CurrentPage) Root c c NoDeskSort, SelectOnRelease Alt_L,CurrentAtEnd, IconifiedAtEnd
-Key Tab A 4 WindowList (CurrentPage) Root c c NoDeskSort, SelectOnRelease Alt_L,CurrentAtEnd, IconifiedAtEnd
+Key Tab A 4 WindowList (CurrentPage) Root c c NoDeskSort, SelectOnRelease Super_L,CurrentAtEnd, IconifiedAtEnd
 
 
 Key r A CM Exec exec grun
