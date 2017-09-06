@@ -157,9 +157,9 @@ DestroyModuleConfig FvwmDock: *
         ActiveIcon  dock/chrome_64.png, \
         Action(Mouse 1) `exec exec google-chrome-stable`
 *FvwmDock:  (5x7+13+0, ActionOnPress, \
-        Icon        dock/p4_48.png, \
-        ActiveIcon  dock/p4_64.png, \
-        Action(Mouse 1) `exec exec /opt/p4v/bin/p4v`)
+        Icon        dock/thunderbird_48.png, \
+        ActiveIcon  dock/thunderbird_64.png, \
+        Action(Mouse 1) `exec exec thunderbird-bin`)
 *FvwmDock:  (5x7+19+0, ActionOnPress, \
         Icon        dock/ooo_48.png, \
         ActiveIcon  dock/ooo_64.png, \
@@ -247,13 +247,12 @@ Style sakura StartsOnDesk 0
 
 Style Pidgin StartsOnDesk 0
 
-# Wined apps
-Style Wine StartsOnDesk 2
-Style VirtualBox StartsOnDesk 2
-Style Audacious StartsOnDesk 2
+# # Wined apps
+# Style Wine StartsOnDesk 2
+# Style VirtualBox StartsOnDesk 2
+# Style Audacious StartsOnDesk 2
 
-# Remote desktops & Entainments.
-Style rdesktop StartsOnDesk 3
-Style xfreerdp StartsOnDesk 3
-Style Remmina StartsOnDesk 3
-
+# # Remote desktops & Entainments.
+# Style rdesktop StartsOnDesk 3
+# Style xfreerdp StartsOnDesk 3
+# Style Remmina StartsOnDesk 3

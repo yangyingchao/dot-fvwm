@@ -17,7 +17,7 @@ Key F12 A 4 Exec google-chrome-stable
 Key F10 A 4 Exec python ~/.fvwm/scripts/rdesk.py || notify-send "Failed to execute rdsk.py"
 
 Key F1 A M Menu MenuFvwmRoot
-Key F2 A M Exec exec grun
+# Key F2 A M Exec exec grun
 Key F3 A 4 Module FvwmConsole
 Key F4 A M Close
 
@@ -26,7 +26,7 @@ Key Tab A 4 WindowList (CurrentPage) Root c c NoDeskSort, SelectOnRelease Super_
 
 
 Key r A CM Exec exec grun
-Key t A MC Exec lxterminal
+Key t A MC Exec urxvt -pe tabbed
 
 #### Screenshots
 

@@ -164,11 +164,12 @@ AddToFunc   StartFunction
 +           I Module FvwmPager 3 0
 +           I Exec exec $[HOME]/.fvwm/tools/run_conky.sh $[vp.width]
 +           I Exec exec fcitx &
++           I Exec exec wicd-gtk -t &
 +           I Module FvwmEvent
-+           I Exec exec pidgin
++           I Exec exec rtx &
 +           I Exec exec udiskie --tray &
++           I Exec exec launchy &
 # +           I Exec exec xscreensaver &
-# +           I Exec exec wicd-gtk -t
 
 
 # fcitx and pidgin does not need to be killed: only one instance will be
