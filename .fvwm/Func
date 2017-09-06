@@ -267,3 +267,19 @@ AddToFunc myMaximize
 + I Current (Maximized) WindowStyle HandleWidth 2 BorderWidth 2
 + I UpdateStyles
 + I Current Maximize
+
+
+# Tile Windows...
+DestroyFunc TileLeft
+AddToFunc TileLeft
++ I ThisWindow (!Shaded, !Iconic) Maximize 50 100
++ I ThisWindow (Maximized, !Shaded, !Iconic) Move +0 +0
+
+
+DestroyFunc TileRight
+AddToFunc TileRight
++ I ThisWindow (!Shaded, !Iconic) Maximize 50 100
++ I ThisWindow (Maximized, !Shaded, !Iconic) Move -0 +0
+
+Key Left A 4 TileLeft
+Key Right A 4 TileRight

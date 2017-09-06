@@ -1,9 +1,9 @@
 ############## root window #######
 # Pager
-# Key 1 A 4 MoveToDesk 0 0
-# Key 2 A 4 MoveToDesk 0 1
-# Key 3 A 4 MoveToDesk 0 2
-# Key 4 A 4 MoveToDesk 0 3
+Key 1 A S4 MoveToDesk 0 0
+Key 2 A S4 MoveToDesk 0 1
+Key 3 A S4 MoveToDesk 0 2
+Key 4 A S4 MoveToDesk 0 3
 
 
 # Minimal windows.
