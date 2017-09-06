@@ -5,7 +5,19 @@ import os
 from os.path import walk
 import sys
 from copy import deepcopy
+import  traceback
 
+def PDEBUG(fmt, *args):
+    """
+    Utility to show debug logs.
+    """
+    stack = traceback.extract_stack(None, 2)[0]
+    try:
+        msg = fmt%args
+    except:
+        msg = "Failed to format string.."
+    finally:
+        print("DEBUG - (%s:%d -- %s): %s"%(stack[0], stack[1], stack[2], msg))
 
 #################  Customized Variables #################
 USER_HOME = os.getenv("HOME")
@@ -28,12 +40,14 @@ class ImageCollection:
         for path in paths:
             if os.path.islink(path):
                 path = os.path.abspath(path)
+            PDEBUG('Collecting icons from: %s', path)
             os.path.walk(path, self._collect, None)
         print "Finished icon collection, size: ", len(self.img_data)
 
     def PrepareIcon(self, name, isCat=False):
         if name is None:
             return ""
+
         icon_fallback = ""
         if os.access(name, os.F_OK): # Input is the absloute path of file.
             icon_fallback = name;
@@ -48,11 +62,15 @@ class ImageCollection:
         bname = os.path.basename(name)
         if "cxmenu-" in name:
             name = name[name.rfind("-")+1:]
+
         icon_path = ""
         pos = bname.rfind(".")
         if pos != -1:
             bname = bname[:pos]
         icon_path = self.img_data.get(bname.lower())
+
+        if isCat:
+            PDEBUG('name: %s, bname: %s, path: %s', name, bname, icon_path)
 
         if icon_path is None:
             icon_path = icon_fallback
@@ -221,7 +239,10 @@ class DesktopEntry:
             self.Category = "Wine"
         else:
             self.Category = self.Category.split(";")[0]
-        print "Name: %s, Category: %s, path: %s" %(self.Name, self.Category,
+            if "wine" in self.Category.lower():
+                self.Category = "Wine"
+
+        PDEBUG("Name: %s, Category: %s, path: %s", self.Name, self.Category,
                                                    self.path)
 
     def __hash__(self):

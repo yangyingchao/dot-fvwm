@@ -1,13 +1,13 @@
 ############## root window #######
 # Pager
-Key 1 A 4 MoveToDesk 0 0
-Key 2 A 4 MoveToDesk 0 1
-Key 3 A 4 MoveToDesk 0 2
-Key 4 A 4 MoveToDesk 0 3
+# Key 1 A 4 MoveToDesk 0 0
+# Key 2 A 4 MoveToDesk 0 1
+# Key 3 A 4 MoveToDesk 0 2
+# Key 4 A 4 MoveToDesk 0 3
 
 
 # Minimal windows.
-Key space A 4 Maximize
+Key space A 4 Exec synapse
 Key space A M Iconify
 Key F1 A 4 Exec pcmanfm
 Key F2 A 4 Exec devhelp
@@ -15,6 +15,7 @@ Key F8 A 4 Module FvwmConsole
 Key F11 A 4 Exec firefox-bin
 Key F12 A 4 Exec google-chrome-stable
 Key F10 A 4 Exec python ~/.fvwm/scripts/rdesk.py || notify-send "Failed to execute rdsk.py"
+Key F10 A M myMaximize
 
 Key F1 A M Menu MenuFvwmRoot
 # Key F2 A M Exec exec grun
@@ -25,8 +26,8 @@ Key Tab A M WindowList (CurrentPage) Root c c NoDeskSort, SelectOnRelease Alt_L,
 Key Tab A 4 WindowList (CurrentPage) Root c c NoDeskSort, SelectOnRelease Super_L,CurrentAtEnd, IconifiedAtEnd
 
 
-Key r A CM Exec exec grun
-Key t A MC Exec urxvt -pe tabbed
+Key r A CM Exec synapse
+Key t A MC Exec run-urxvt
 
 #### Screenshots
 
@@ -36,10 +37,9 @@ Key Print A M Exec exec import $[HOME]/tmp/$[w.resource]_p_$(date +"%Y-%m-%d_%H-
 Key Print A CM Exec exec scrot -d 2 $[HOME]/tmp/root_$(date +"%Y-%m-%d_%H-%M-%S")".png"
 
 
-Key t A 4 Exec exec urxvt
 Key Pause A C ExitMenu
 
-Key XF86Mail A A Exec exec sylpheed
+Key XF86Mail A A Exec exec thunderbird-bin
 Key XF86WWW A A Exec exec xdg-open about:blank
 key XF86AudioLowerVolume 	A A Exec exec amixer set Master 10%-
 key XF86AudioRaiseVolume 	A A Exec exec amixer set Master 10%+

@@ -156,7 +156,8 @@ AddToFunc Wallpaper-Set
 
 DestroyFunc StartFunction
 AddToFunc   StartFunction
-+           I Exec exec xcompmgr xcompmgr -c -C -r7 -l-10 -t-10 -o.75 &
++           I Exec exec xcompmgr -c -C -r7 -l-10 -t-10 -o.75 &
++           I Exec exec /usr/libexec/gnome-settings-daemon &
 +           I Exec exec habak -ms $[HOME]/.fvwm/wallpapers/*
 +           I Module FvwmAnimate
 +           I Module FvwmAuto FvwmAutoHide -menter FvwmDockerAutoEnter
@@ -168,7 +169,7 @@ AddToFunc   StartFunction
 +           I Module FvwmEvent
 +           I Exec exec rtx &
 +           I Exec exec udiskie --tray &
-+           I Exec exec launchy &
++           I Exec exec synapse -s &
 # +           I Exec exec xscreensaver &
 
 
