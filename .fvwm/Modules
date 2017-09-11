@@ -144,37 +144,11 @@ DestroyModuleConfig FvwmDock: *
 *FvwmDock:  BoxSize     fixed
 *FvwmDock:  Colorset    50
 *FvwmDock:  Rows        1
-*FvwmDock:  Columns     60
-*FvwmDock:  Geometry    850x32-900
+*FvwmDock:  Columns     1
+*FvwmDock:  Geometry    320x32-900
 *FvwmDock:  Padding     1 1
 *FvwmDock:  Frame       0
-*FvwmDock: (5x7+0-0, Swallow(NoClose, UseOld) stalonetray `Exec exec stalonetray --geometry 1x1+0-0 -p`)
-# *FvwmDock:  (5x7+1+0, ActionOnPress, \
-#         Icon        dock/filemanager_48.png, \
-#         ActiveIcon  dock/filemanager_64.png, \
-#         Action(Mouse 1) `exec exec pcmanfm`)
-# *FvwmDock:  (5x7+7+0, ActionOnPress, \
-#         Icon        dock/chrome_48.png, \
-#         ActiveIcon  dock/chrome_64.png, \
-#         Action(Mouse 1) `exec exec google-chrome-stable`
-# *FvwmDock:  (5x7+13+0, ActionOnPress, \
-#         Icon        dock/thunderbird_48.png, \
-#         ActiveIcon  dock/thunderbird_64.png, \
-#         Action(Mouse 1) `exec exec thunderbird-bin`)
-# *FvwmDock:  (5x7+19+0, ActionOnPress, \
-#         Icon        dock/ooo_48.png, \
-#         ActiveIcon  dock/ooo_64.png, \
-#         Action(Mouse 1) `exec exec libreoffice`)
-# *FvwmDock:  (5x7+25+0, ActionOnPress, \
-#         Icon        dock/gimp_48.png, \
-#         ActiveIcon  dock/gimp_64.png, \
-#         Action(Mouse 1) `exec exec gimp`)
-# *FvwmDock:  (5x7+31+0, ActionOnPress, \
-#         Icon        dock/virtualbox_48.png, \
-#         ActiveIcon  dock/virtualbox_64.png, \
-#         Action(Mouse 1) `exec exec VirtualBox`)
-# *FvwmDock (5x7+37+0, Swallow(Respawn, NoHints) wmclock `Exec exec wmclock`)
-# *FvwmDock: (5x7+44, Swallow(NoClose, UseOld) stalonetray `Exec exec stalonetray --geometry 4x1+0-0 -p`)
+*FvwmDock: (Swallow(NoClose, UseOld) stalonetray "Nop")
 
 
 ############################# Decor ##########################################
@@ -245,7 +219,6 @@ Style RemotePC PositionPlacement 80 52
 # Classified apps.
 Style emacs StartsOnDesk 0
 Style sakura StartsOnDesk 0
-
 Style Pidgin StartsOnDesk 0
 
 # # Wined apps
