@@ -253,7 +253,7 @@ DestroyFunc DeThumbnail
 AddToFunc DeThumbnail
 	+ I PipeRead 'bash $[fvwm_script]/thumbnail-destroy "$[w.id]" "/tmp"'
     + I Iconify off
-    + I DestroyWindowStyle
+    + I Current (Maximized) WindowStyle !Borders
 
 
 *FvwmEvent: deiconify DeThumbnail
