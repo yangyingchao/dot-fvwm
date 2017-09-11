@@ -148,7 +148,7 @@ DestroyModuleConfig FvwmDock: *
 *FvwmDock:  Geometry    850x32-900
 *FvwmDock:  Padding     1 1
 *FvwmDock:  Frame       0
-*FvwmDock: (1x1+0-0, Swallow(NoClose, UseOld) stalonetray `Exec exec stalonetray --geometry 1x1+0-0 -p`)
+*FvwmDock: (5x7+0-0, Swallow(NoClose, UseOld) stalonetray `Exec exec stalonetray --geometry 1x1+0-0 -p`)
 # *FvwmDock:  (5x7+1+0, ActionOnPress, \
 #         Icon        dock/filemanager_48.png, \
 #         ActiveIcon  dock/filemanager_64.png, \
