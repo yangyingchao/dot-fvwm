@@ -261,8 +261,8 @@ AddToFunc DeThumbnail
 
 # Key f A  4 WindowStyle NoTitle, !Borders # 4-f: full (no borders or title bar)
 
-DestroyFunc myMaximize
-AddToFunc myMaximize
+DestroyFunc MyMaximize
+AddToFunc MyMaximize
 + I Current (!Maximized) WindowStyle !Borders
 + I Current (Maximized) WindowStyle Borders
 + I Current (Maximized) WindowStyle HandleWidth 2 BorderWidth 2

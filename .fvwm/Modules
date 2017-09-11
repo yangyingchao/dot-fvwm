@@ -115,7 +115,7 @@ AddToFunc RaiseAllWindow
 
 DestroyFunc Maximize-or-Move
 AddToFunc Maximize-or-Move
-+ D Maximize
++ D MyMaximize
 + C RaiseAllWindow
 + C Focus
 + M Move
@@ -143,12 +143,12 @@ Style FvwmButtons HandleWidth 2, NoHandles, FixedPosition, CirculateHit, \
 DestroyModuleConfig FvwmDock: *
 *FvwmDock:  BoxSize     fixed
 *FvwmDock:  Colorset    50
-*FvwmDock:  Rows        2
+*FvwmDock:  Rows        1
 *FvwmDock:  Columns     60
 *FvwmDock:  Geometry    850x32-900
 *FvwmDock:  Padding     1 1
 *FvwmDock:  Frame       0
-*FvwmDock: (5x7+1, Swallow(NoClose, UseOld) stalonetray `Exec exec stalonetray --geometry 4x1+0-0 -p`)
+*FvwmDock: (1x1+0-0, Swallow(NoClose, UseOld) stalonetray `Exec exec stalonetray --geometry 1x1+0-0 -p`)
 # *FvwmDock:  (5x7+1+0, ActionOnPress, \
 #         Icon        dock/filemanager_48.png, \
 #         ActiveIcon  dock/filemanager_64.png, \
