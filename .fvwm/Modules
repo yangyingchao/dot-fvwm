@@ -1,13 +1,16 @@
 # styles for fvwm modules.
+Colorset 50 RootTransparent, fg black, hi #343434, sh #343434, Tint white 75
+Colorset 51 RootTransparent, fg black, hi #343434, sh #343434, Tint white 30
+Colorset 52 RootTransparent, fg black, hi #343434, sh #343434, Tint white 50
+
+Colorset 53 RootTransparent, fg black, hi #343434, sh #343434, bg #9cb2ee, Tint #9cb2ee 90
+
 Style Fvwm* NoTitle,Sticky,BorderWidth 6, CirculateSkipIcon, CirculateSkip
 Style FvwmBanner  StaysOnTop
 Style FvwmForm  StaysOnTop
 
 ############################### Pager #####################################
 DeskTopSize 1x1
-
-Colorset 40 fg #839eb0, bg #839eb0, hi black, sh #839eb0, RootTransparent buffer, Tint #4584b5 0
-Colorset 41 fg black, bg #e9b96e, hi green, sh yellow, RootTransparent buffer, Tint #4584b5 0
 
 Style FvwmPager NoTitle, Sticky, WindowListSkip, CirculateSkipIcon, CirculateSkip, BorderWidth 1, BorderColorset 5, NoHandles, NeverFocus, StaysOnBottom
 
@@ -20,18 +23,18 @@ PipeRead `pos=$(($[vp.width]-365)); echo "*FvwmPager: Geometry +$pos+2"`
 
 *FvwmPager: SolidSeparators
 *FvwmPager: BorderWidth     	1
-*FvwmPager: Colorset        	* 40
-*FvwmPager: HilightColorset 	* 41
+*FvwmPager: Colorset        	50
+*FvwmPager: HilightColorset 	53
 
 *FvwmPager: DesktopScale    	22
 *FvwmPager: MiniIcons
 *FvwmPager: MoveThreshold   	0
-! *FvwmPager: ShapeLabels
+*FvwmPager: NoShapeLabels
 *FvwmPager: SloppyFocus
 
 *FvwmPager: UseSkipList
-*FvwmPager: WindowBorderWidth 1
-*FvwmPager: WindowColorsets   40 41
+*FvwmPager: WindowBorderWidth 0
+*FvwmPager: WindowColorsets   50 51
 
 *FvwmPager: Font "StringEncoding=utf-8:xft:WenQuanYi Micro Hei:Medium:Size=12:encoding=zh_CN.UTF-8"
 *FvwmPager: SmallFont "StringEncoding=utf-8:xft:WenQuanYi Micro Hei:Medium:Size=12:encoding=zh_CN.UTF-8"
@@ -117,22 +120,15 @@ AddToFunc Maximize-or-Move
 
 Mouse 0 1 A Menu MenuWindowOptions Close
 Mouse 0 2 A Close
+Mouse 1 R A Nop
 Mouse 0 4 A myMaximize
 Mouse 0	6 A Thumbnail
 Mouse 1 I A DeThumbnail
-Mouse 1 R A Menu MenuFvwmRoot Nop
 Mouse 1 T A Maximize-or-Move
 Mouse 1 W M FuncMoveOrMaximize
 Mouse 3 R A WindowList NoGeometry
 
 ############## Buttons
-Colorset 50 RootTransparent, fg black, hi #343434, sh #343434, Tint white 75
-Colorset 51 RootTransparent, fg black, hi #343434, sh #343434, Tint white 30
-Colorset 52 RootTransparent, fg black, hi #343434, sh #343434, Tint white 50
-
-Colorset 53 RootTransparent, fg black, hi #343434, sh #343434, bg #9cb2ee, Tint #9cb2ee 90
-
-
 
 Style FvwmButtons HandleWidth 2, NoHandles, FixedPosition, CirculateHit, \
       NeverFocus, WindowListSkip, !Iconifiable, Fixedsize, !Title,\

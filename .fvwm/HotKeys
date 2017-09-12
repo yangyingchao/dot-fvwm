@@ -18,7 +18,6 @@ Key F10 A 4 Exec python ~/.fvwm/scripts/rdesk.py || notify-send "Failed to execu
 Key F10 A M myMaximize
 
 Key F1 A M Menu MenuFvwmRoot
-# Key F2 A M Exec exec grun
 Key F3 A 4 Module FvwmConsole
 Key F4 A M Close
 
