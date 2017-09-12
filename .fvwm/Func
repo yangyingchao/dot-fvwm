@@ -159,7 +159,7 @@ AddToFunc   StartFunction
 +           I Module FvwmAuto FvwmAutoHide -menter FvwmDockerAutoEnter
 +           I Module FvwmPager 3 0
 +           I Module FvwmEvent
-+           I Test (Init) Exec exec xcompmgr -c -C -r7 -l-10 -t-10 -o.75 &
++           I  Exec exec xcompmgr -c -C -r7 -l-10 -t-10 -o.75 &
 +           I Test (Init)  Exec exec /usr/libexec/gnome-settings-daemon &
 +           I Test (Init) Exec exec habak -ms $[HOME]/.fvwm/wallpapers/*
 +           I Test (Init) Exec exec $[HOME]/.fvwm/tools/run_conky.sh $[vp.width]

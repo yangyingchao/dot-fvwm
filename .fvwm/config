@@ -81,11 +81,15 @@ AddToFunc LowerTemp
 #        2. show FvwmPager.
 DestroyFunc OnTopEdge
 AddToFunc OnTopEdge
-+ I PipeRead `[ $[pointer.x]  -lt 30 ] && [ $[pointer.y] -lt 30 ] && \
-    echo "FuncShowWindowList"`
-+ I PipeRead `[ $[pointer.x]  -gt $(( $[vp.width] - 370 )) ] && [ $[pointer.x] -lt $(( $[vp.width] - 130 )) ] && echo "TempRaise FvwmPager"`
-+ I PipeRead `[ $[pointer.x] -gt 250 ] && [ $[pointer.x] -lt $(( $[vp.width]-370 )) ] && \
-    echo    "TempRaise FvwmButtons" `
++ I PipeRead `[ $[pointer.x]  -lt 30 ] && \
+              [ $[pointer.y] -lt 30 ] && \
+              echo "FuncShowWindowList"`
++ I PipeRead `[ $[pointer.x]  -gt $(( $[vp.width] - 370 )) ] && \
+              [ $[pointer.x] -lt $(( $[vp.width] - 130 )) ] && \
+              echo "TempRaise FvwmPager"`
++ I PipeRead `[ $[pointer.x] -gt 450 ] && \
+              [ $[pointer.x] -lt $(( $[vp.width]-450 )) ] && \
+              echo    "TempRaise FvwmButtons" `
 
 # Left Edge command:
 #        1. Popup window list (top left corner),
