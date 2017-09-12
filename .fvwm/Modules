@@ -162,21 +162,27 @@ DestroyModuleConfig TaskBarIcons:*
 *TaskBarIcons: UseWinList true
 *TaskBarIcons: Tips needed
 *TaskBarIcons: Font "StringEncoding=utf-8:xft:WenQuanYi Micro Hei:Medium:Size=12:encoding=zh_CN.UTF-8"
-*TaskBarIcons: ButtonGeometry 120x26
-*TaskBarIcons: MaxButtonWidth 120
-*TaskBarIcons: ManagerGeometry 1x1
+*TaskBarIcons: ButtonGeometry 128x26
+*TaskBarIcons: MaxButtonWidth 200
+*TaskBarIcons: ManagerGeometry 2x1+0+0
 *TaskBarIcons: DrawIcons always
-*TaskBarIcons: ReliefThickness 2
+*TaskBarIcons: ReliefThickness 1
+*TaskBarIcons: Title ""
 *TaskBarIcons: Fromat "%t"
 *TaskBarIcons: IconButton down
 *TaskBarIcons: IconAndSelectButton down
 *TaskBarIcons: SelectButton up
+*TaskBarIcons: Colorset 50
 *TaskBarIcons: ActiveColorset 50
+*TaskBarIcons: FocusButton flat
+*TaskBarIcons: FocusColorSet 53
+*TaskBarIcons: SelectButton flat
+*TaskBarIcons: SelectColorSet 53
+*TaskBarIcons: FocusAndSelectColorSet 53
+
 
 # button actions
 *TaskBarIcons: Action (Mouse 1) A sendcommand IconManClick
-*TaskBarIcons: Action (Mouse 2) A sendcommand Nop
-*TaskBarIcons: Action (Mouse 3) A sendcommand "Menu MenuIconOps Mouse 0 o100"
 
 ############################# Decor ##########################################
 
