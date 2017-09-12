@@ -112,8 +112,6 @@ AddToFunc OnRightEdge
 #        3. Popup root menu (left bottom corner).
 DestroyFunc OnBottomEdge
 AddToFunc OnBottomEdge
-+ I PipeRead `[ $[pointer.x] -gt 250 ] && [ $[pointer.x] -lt $(( $[vp.width]-150 )) ] && \
-    echo    "TempRaise FvwmButtons" `
 + I PipeRead ` [ $[pointer.x] -gt $(( $[vp.width] - 30 )) ] && \
     echo    "FuncShowDesktop" `
 

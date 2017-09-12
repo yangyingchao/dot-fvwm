@@ -126,27 +126,35 @@ Mouse 1 W M FuncMoveOrMaximize
 Mouse 3 R A WindowList NoGeometry
 
 ############## Buttons
-Colorset 50 fg #ffffff, bg #4584b5, hi gray, sh gray, RootTransparent buffer, IconAlpha 75, Tint #4584b5 0
-Colorset 51 fg #ffffff, bg #7f7f7f, hi gray, sh gray, RootTransparent buffer, IconAlpha 100, Tint #4584b5 0
+Colorset 50 RootTransparent, fg black, hi #343434, sh #343434, Tint white 75
+Colorset 51 RootTransparent, fg black, hi #343434, sh #343434, Tint white 30
+Colorset 52 RootTransparent, fg black, hi #343434, sh #343434, Tint white 50
+
+Colorset 53 RootTransparent, fg black, hi #343434, sh #343434, bg #9cb2ee, Tint #9cb2ee 90
+
+
 
 Style FvwmButtons HandleWidth 2, NoHandles, FixedPosition, CirculateHit, \
-    NeverFocus, WindowListSkip, !Iconifiable, Fixedsize, NoTitle,\
-	StaysOnBottom, Sticky, CirculateSkipIcon, CirculateSkip
+      NeverFocus, WindowListSkip, !Iconifiable, Fixedsize, !Title,\
+      StaysOnBottom, Sticky, CirculateSkipIcon, CirculateSkip, ParentalRelativity,\
+      Borders
 
 
 DestroyModuleConfig FvwmDock: *
 *FvwmDock:  BoxSize     fixed
-*FvwmDock:  Colorset    9
 *FvwmDock:  Rows        1
-PipeRead `w=$(($[vp.width])); echo "*FvwmDock: Columns ${w}"`
-PipeRead `w=$(($[vp.width])); echo "*FvwmDock: Geometry ${w}x32+0+0"`
-*FvwmDock:  Padding     1 1
+*FvwmDock: Geometry $[vp.width]x26+0+0
+*FvwmDock: ButtonGeometry 1x26
+*FvwmDock:  Padding     0 0
 *FvwmDock:  Frame       0
-*FvwmDock: (32x1, ActionOnPress, \
+*FvwmDock:  Colorset    50
+*FvwmDock:  ActiveColorset    53
+*FvwmDock:  PressColorset    53
+*FvwmDock: (50x1, ActionOnPress, \
         Icon   actions/menu.png, \
         Action(Mouse 1) \
         Menu MenuFvwmRoot +0+0)
-PipeRead `w=$(($[vp.width]-32-55-120-240)); \
+PipeRead `w=$(($[vp.width]-50-55-120-240)); \
          echo "*FvwmDock: (${w}x1, Left, Swallow TaskBarIcons 'Module FvwmIconMan TaskBarIcons')"`
 *FvwmDock: (120x1, Swallow(NoClose, UseOld) stalonetray "Nop")
 *FvwmDock: (55x1, id "TaskTime", Title "Time")
@@ -156,10 +164,9 @@ PipeRead `w=$(($[vp.width]-32-55-120-240)); \
 DestroyModuleConfig TaskBarIcons:*
 *TaskBarIcons: IconName TaskBarIcons
 *TaskBarIcons: UseWinList true
-*TaskBarIcons: Resolution global
 *TaskBarIcons: Tips needed
 *TaskBarIcons: Font "StringEncoding=utf-8:xft:WenQuanYi Micro Hei:Medium:Size=12:encoding=zh_CN.UTF-8"
-*TaskBarIcons: ButtonGeometry 120x32
+*TaskBarIcons: ButtonGeometry 120x26
 *TaskBarIcons: MaxButtonWidth 120
 *TaskBarIcons: ManagerGeometry 1x1
 *TaskBarIcons: DrawIcons always
@@ -168,13 +175,7 @@ DestroyModuleConfig TaskBarIcons:*
 *TaskBarIcons: IconButton down
 *TaskBarIcons: IconAndSelectButton down
 *TaskBarIcons: SelectButton up
-! *TaskBarIcons: Background #003c3c
-! *TaskBarIcons: Foreground #ffffff
-! *TaskBarIcons: PlainColorset 15
-! *TaskBarIcons: FocusColorset 16
-! *TaskBarIcons: FocusAndSelectColorset 16
-! *TaskBarIcons: SelectColorset 16
-! *TaskBarIcons: IconAndSelectColorset 16
+*TaskBarIcons: ActiveColorset 50
 
 # button actions
 *TaskBarIcons: Action (Mouse 1) A sendcommand IconManClick
