@@ -149,7 +149,7 @@ DestroyModuleConfig FvwmDock: *
 *FvwmDock: (50x1, ActionOnPress, \
         Icon   actions/menu.png, \
         Action(Mouse 1) \
-        Menu MenuFvwmRoot +0+0)
+        FuncShowRootMenu)
 PipeRead `w=$(($[vp.width]-50-55-120-240)); \
          echo "*FvwmDock: (${w}x1, Left, Swallow TaskBarIcons 'Module FvwmIconMan TaskBarIcons')"`
 *FvwmDock: (120x1, Swallow(NoClose, UseOld) stalonetray "Nop")

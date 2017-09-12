@@ -84,9 +84,6 @@ AddToFunc OnTopEdge
 + I PipeRead `[ $[pointer.x]  -lt 30 ] && \
               [ $[pointer.y] -lt 30 ] && \
               echo "FuncShowWindowList"`
-+ I PipeRead `[ $[pointer.x]  -gt $(( $[vp.width] - 370 )) ] && \
-              [ $[pointer.x] -lt $(( $[vp.width] - 130 )) ] && \
-              echo "TempRaise FvwmPager"`
 + I PipeRead `[ $[pointer.x] -gt 30 ] && echo    "TempRaise FvwmButtons" `
 
 # Left Edge command:
@@ -118,7 +115,7 @@ AddToFunc OnBottomEdge
 
 ###########################################################
 # Colorsets
-###########################################################
+p###########################################################
 
 Colorset 1 fg white, bg black, sh black, hi black, fgsh white
 Colorset 2 fg #ffffff, bg #000000, sh #000000, hi #000000

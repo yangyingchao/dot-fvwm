@@ -299,3 +299,9 @@ DestroyFunc FuncStartSysTrayApplets
 AddToFunc FuncStartSysTrayApplets
 + I PipeRead 'echo SetEnv systray_started `ps -e | grep -c stalonetray'
 + I Test (EnvMatch systray_started 0) break
+
+
+DestroyFunc FuncShowRootMenu
+AddToFunc FuncShowRootMenu
++ I TempRaise FvwmButtons
++ I Menu MenuFvwmRoot  Root o0 o3
