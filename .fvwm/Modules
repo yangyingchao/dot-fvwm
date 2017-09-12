@@ -145,7 +145,7 @@ PipeRead `w=$(($[vp.width])); echo "*FvwmDock: Geometry ${w}x32+0+0"`
 *FvwmDock: (32x1, ActionOnPress, \
         Icon   actions/menu.png, \
         Action(Mouse 1) \
-        Menu MenuFvwmRoot)
+        Menu MenuFvwmRoot +0+0)
 PipeRead `w=$(($[vp.width]-32-55-120-240)); \
          echo "*FvwmDock: (${w}x1, Left, Swallow TaskBarIcons 'Module FvwmIconMan TaskBarIcons')"`
 *FvwmDock: (120x1, Swallow(NoClose, UseOld) stalonetray "Nop")
