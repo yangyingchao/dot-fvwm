@@ -152,9 +152,10 @@ DestroyModuleConfig FvwmDock: *
         FuncShowRootMenu)
 PipeRead `w=$(($[vp.width]-50-55-120-240)); \
          echo "*FvwmDock: (${w}x1, Left, Swallow TaskBarIcons 'Module FvwmIconMan TaskBarIcons')"`
-*FvwmDock: (120x1, Swallow(NoClose, UseOld) stalonetray "Nop")
+*FvwmDock: (120, Swallow(NoClose, UseOld) stalonetray "Nop")
 *FvwmDock: (55x1, id "TaskTime", Title "Time")
 *FvwmDock: (240x1, Right, Swallow FvwmPager 'Module FvwmPager FvwmPager 3 0')
+*FvwmDock: Font "StringEncoding=utf-8:xft:WenQuanYi Micro Hei:Medium:Size=12:encoding=zh_CN.UTF-8"
 
 
 DestroyModuleConfig TaskBarIcons:*
