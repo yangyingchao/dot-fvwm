@@ -36,8 +36,8 @@ PipeRead `pos=$(($[vp.width]-365)); echo "*FvwmPager: Geometry +$pos+2"`
 *FvwmPager: WindowBorderWidth 0
 *FvwmPager: WindowColorsets   50 51
 
-*FvwmPager: Font "StringEncoding=utf-8:xft:WenQuanYi Micro Hei:Medium:Size=12:encoding=zh_CN.UTF-8"
-*FvwmPager: SmallFont "StringEncoding=utf-8:xft:WenQuanYi Micro Hei:Medium:Size=12:encoding=zh_CN.UTF-8"
+*FvwmPager: Font "none"
+*FvwmPager: SmallFont "none"
 
 *FvwmPager: Balloons			All
 *FvwmPager: BalloonBorderWidth  1
