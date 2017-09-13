@@ -159,6 +159,15 @@ PipeRead `w=$(($[vp.width]-50-55-120-160)); \
 *FvwmDock: Font "StringEncoding=utf-8:xft:WenQuanYi Micro Hei:Medium:Size=12:encoding=zh_CN.UTF-8"
 
 
+DestroyFunc FuncIconManClick
+AddToFunc FuncIconManClick
++ I ThisWindow (Raised, !Shaded, !Iconic, CurrentPage) Iconify
++ I TestRc (Match) Break
++ I ThisWindow (!Raised) Raise
++ I ThisWindow (!Shaded) WindowShade
++ I ThisWindow (Iconic)  Iconify
++ I ThisWindow (AcceptsFocus)  FlipFocus
+
 DestroyModuleConfig TaskBarIcons:*
 *TaskBarIcons: IconName TaskBarIcons
 *TaskBarIcons: UseWinList true
@@ -181,10 +190,10 @@ DestroyModuleConfig TaskBarIcons:*
 *TaskBarIcons: SelectButton flat
 *TaskBarIcons: SelectColorSet 51
 *TaskBarIcons: FocusAndSelectColorSet 53
+*TaskBarIcons: Action Mouse 1 A sendcommand FuncIconManClick
 
 
 # button actions
-*TaskBarIcons: Action (Mouse 1) A sendcommand IconManClick
 
 ############################# Decor ##########################################
 
