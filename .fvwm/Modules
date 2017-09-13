@@ -161,12 +161,11 @@ PipeRead `w=$(($[vp.width]-50-55-120-160)); \
 
 DestroyFunc FuncIconManClick
 AddToFunc FuncIconManClick
-+ I ThisWindow (Raised, !Shaded, !Iconic, CurrentPage) Iconify
-+ I TestRc (Match) Break
-+ I ThisWindow (!Raised) Raise
-+ I ThisWindow (!Shaded) WindowShade
-+ I ThisWindow (Iconic)  Iconify
-+ I ThisWindow (AcceptsFocus)  FlipFocus
+# + I ThisWindow (Raised, !Iconic, CurrentPage) Iconify
+# + I TestRc (Match) Break
++ I Iconify off
++ I Focus
++ I Raise
 
 DestroyModuleConfig TaskBarIcons:*
 *TaskBarIcons: IconName TaskBarIcons
@@ -191,6 +190,8 @@ DestroyModuleConfig TaskBarIcons:*
 *TaskBarIcons: SelectColorSet 51
 *TaskBarIcons: FocusAndSelectColorSet 53
 *TaskBarIcons: Action Mouse 1 A sendcommand FuncIconManClick
+*TaskBarIcons: Action Mouse 2 A sendcommand WarpToWindow
+*TaskBarIcons: Action Mouse 3 A sendcommand "Module FvwmIdent FvwmIdent"
 
 
 # button actions
