@@ -144,7 +144,7 @@ DestroyModuleConfig FvwmDock: *
 *FvwmDock:  Padding     0 0
 *FvwmDock:  Frame       0
 *FvwmDock:  Colorset    50
-*FvwmDock:  ActiveColorset    53
+*FvwmDock:  ActiveColorset   53
 *FvwmDock:  PressColorset    53
 *FvwmDock: (50x1, ActionOnPress, \
         Icon   actions/menu.png, \

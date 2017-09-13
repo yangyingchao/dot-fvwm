@@ -158,7 +158,8 @@ AddToFunc   StartFunction
 +           I Module FvwmAnimate
 +           I Module FvwmAuto FvwmAutoHide -menter FvwmDockerAutoEnter
 +           I Module FvwmEvent
-+           I  Exec exec xcompmgr -c -C -r7 -l-10 -t-10 -o.75 &
++           I FuncUpdateTime
++           I Exec exec xcompmgr -c -C -r7 -l-10 -t-10 -o.75 &
 +           I Test (Init)  Exec exec /usr/libexec/gnome-settings-daemon &
 +           I Test (Init) Exec exec habak -ms $[HOME]/.fvwm/wallpapers/*
 +           I Test (Init) Exec exec $[HOME]/.fvwm/tools/run_conky.sh $[vp.width]
@@ -305,3 +306,11 @@ DestroyFunc FuncShowRootMenu
 AddToFunc FuncShowRootMenu
 + I TempRaise FvwmButtons
 + I Menu MenuFvwmRoot  Root o0 o3
+
+
+DestroyFunc FuncUpdateTime
+AddToFunc FuncUpdateTime
++ I PipeRead 'echo "SendToModule \
+    FvwmButtons ChangeButton TaskTime Title \"`date +%R`\""'
++ I Schedule Periodic 10000 PipeRead 'echo "SendToModule \
+    FvwmButtons ChangeButton TaskTime Title \"`date +%R`\""'
