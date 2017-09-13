@@ -158,7 +158,6 @@ AddToFunc   StartFunction
 +           I Module FvwmAnimate
 +           I Module FvwmAuto FvwmAutoHide -menter FvwmDockerAutoEnter
 +           I Module FvwmEvent
-+           I FuncUpdateTime
 +           I Exec exec xcompmgr -c -C -r7 -l-10 -t-10 -o.75 &
 +           I Test (Init)  Exec exec /usr/libexec/gnome-settings-daemon &
 +           I Test (Init) Exec exec habak -ms $[HOME]/.fvwm/wallpapers/*
@@ -172,6 +171,7 @@ AddToFunc   StartFunction
 +           I Test (Init) FuncStartSysTray
 +           I Test (Init) FuncStartSysTrayApplets
 +           I Module FvwmButtons FvwmDock
++           I FuncUpdateTime
 
 # fcitx and pidgin does not need to be killed: only one instance will be
 # created.
