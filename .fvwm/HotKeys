@@ -30,6 +30,7 @@ Key Tab A 4 WindowList (CurrentPage) Root c c NoDeskSort, SelectOnRelease Super_
 
 Key r A CM Exec synapse
 Key t A MC Exec run-urxvt
+Key t A MS Exec run-urxvt x
 
 #### Screenshots
 
