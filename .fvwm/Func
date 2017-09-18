@@ -319,3 +319,10 @@ DestroyFunc FuncUpdateMenu
 AddToFunc FuncUpdateMenu
 + I PipeRead "$[HOME]/.fvwm/tools/menu_gen.py"
 + I Read Menu
+
+DestroyFunc TTTT
+AddToFunc TTTT
++ I Test (EdgetIsActive North)
++ I TestRc (Match) PipeRead `echo "A" >> /tmp/aa.txt; echo "Break"`
++ I Test (EdgetHasPointer Top)
++ I TestRc (Match) PipeRead `echo "B" >> /tmp/bb.txt; echo "Break"`

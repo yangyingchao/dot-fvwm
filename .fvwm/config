@@ -73,12 +73,14 @@ DestroyFunc LowerTemp
 AddToFunc LowerTemp
 + I All (HasPointer,$0) Schedule 500 1003 LowerTemp $0
 + I TestRc (Match) Break
-+ I All ($0) Layer 0 2
++ I PipeRead `[ $[pointer.y] -le 26 ] && \
+              echo "Schedule 500 1003 LowerTemp $0" || \
+              echo "All ($0) Layer 0 2"`
 
 
 # Top Edge command:
 #        1. Popup window list (top left corner)
-#        2. show FvwmPager.
+#        2. show taskbar
 DestroyFunc OnTopEdge
 AddToFunc OnTopEdge
 + I PipeRead `[ $[pointer.x]  -lt 10 ] && \
