@@ -4,7 +4,7 @@
 #
 
 TOP=$PWD
-DRY_RUN=1
+DRY_RUN=
 
 
 die() {
@@ -22,8 +22,10 @@ my_exec()
 {
     if [ -z $DRY_RUN ]; then
         eval "$*"
+        return $?
     else
         echo "EXEC: $*"
+        return 0
     fi
 }
 
@@ -33,7 +35,10 @@ my_link()
     local src=$1
     local dst=$2
 
-    [ -e $dst ] && my_exec rm -rf $dst || die "Deleting failed.."
+    echo "$src ==> $dst"
+    if [ -e $dst ]; then
+        my_exec rm -rf $dst || die "Deleting failed.."
+    fi
     my_exec  ln -sf $src $dst || die "linking failed.."
 }
 
