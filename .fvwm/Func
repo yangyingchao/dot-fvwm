@@ -313,3 +313,9 @@ AddToFunc FuncUpdateTime
     FvwmButtons ChangeButton TaskTime Title \"`date +%R`\""'
 + I Schedule Periodic 10000 PipeRead 'echo "SendToModule \
     FvwmButtons ChangeButton TaskTime Title \"`date +%R`\""'
+
+
+DestroyFunc FuncUpdateMenu
+AddToFunc FuncUpdateMenu
++ I PipeRead "$[HOME]/.fvwm/tools/menu_gen.py"
++ I Read Menu

@@ -5,7 +5,8 @@ import os
 from os.path import walk
 import sys
 from copy import deepcopy
-import  traceback
+import traceback
+
 
 def PDEBUG(fmt, *args):
     """
@@ -13,11 +14,12 @@ def PDEBUG(fmt, *args):
     """
     stack = traceback.extract_stack(None, 2)[0]
     try:
-        msg = fmt%args
+        msg = fmt % args
     except:
         msg = "Failed to format string.."
     finally:
-        print("DEBUG - (%s:%d -- %s): %s"%(stack[0], stack[1], stack[2], msg))
+        print("DEBUG - (%s:%d -- %s): %s" % (stack[0], stack[1], stack[2], msg))
+
 
 #################  Customized Variables #################
 USER_HOME = os.getenv("HOME")
@@ -34,6 +36,7 @@ fvwm_menu_output = os.path.join(FVWM_HOME, "Menu")
 DESKTOP_SEARCH_PATH = ["/usr/share/applications",
                        os.path.join(USER_HOME, ".local/share/applications")]
 
+
 class ImageCollection:
     def __init__(self, paths):
         self.img_data = {}
@@ -49,19 +52,19 @@ class ImageCollection:
             return ""
 
         icon_fallback = ""
-        if os.access(name, os.F_OK): # Input is the absloute path of file.
-            icon_fallback = name;
-        if isCat: # Categories start with applications-.
+        if os.access(name, os.F_OK):  # Input is the absloute path of file.
+            icon_fallback = name
+        if isCat:  # Categories start with applications-.
             name = name.lower()
             if "network" in name:
                 name = "internet.png"
             elif "audiovideo" in name:
                 name = "multimedia.png"
-            name = "applications-%s"%name
+            name = "applications-%s" % name
 
         bname = os.path.basename(name)
         if "cxmenu-" in name:
-            name = name[name.rfind("-")+1:]
+            name = name[name.rfind("-") + 1:]
 
         icon_path = ""
         pos = bname.rfind(".")
@@ -82,21 +85,21 @@ class ImageCollection:
             else:
                 bname += ".png"
             icon_out = os.path.join(fvwm_icon_home, bname)
-            os.system('convert -background none -resize 24x24 "%s" "%s"'%(
+            os.system('convert -background none -resize 24x24 "%s" "%s"' % (
                 icon_path, icon_out))
 
         return icon_out
 
     def _collect(self, arg, dirname, filenames):
-        #TODO: This should be optimized by analyzing "index.theme" file.
+        # TODO: This should be optimized by analyzing "index.theme" file.
         size = len(filenames)
         for i in range(size):
-            idx = size - 1 -i;
+            idx = size - 1 - i
             fn = filenames[idx]
             if fn.find("16/") != -1 or fn.find("22/") != -1 or \
                fn.find("32/") != -1 or fn.find("24/") != -1 or \
                fn == "scalable":
-                filenames.pop(idx);
+                filenames.pop(idx)
                 continue
 
             path = os.path.join(dirname, fn)
@@ -106,9 +109,11 @@ class ImageCollection:
             key = fn.split(".")[0].lower()
             self.img_data[key] = path
 
+
 g_iconBase = ImageCollection(["/usr/share/pixmaps", "/usr/share/icons/hicolor",
                               os.path.join(USER_HOME, ".icons/default"),
                               os.path.join(USER_HOME, ".fvwm/icons/collection")])
+
 
 def SimpleRead(fn):
     """
@@ -119,8 +124,8 @@ def SimpleRead(fn):
     content = ""
     try:
         content = open(fn).read()
-    except :
-        print("Failed to read file: %s\n"%(fn))
+    except:
+        print("Failed to read file: %s\n" % (fn))
         print sys.exc_info()[1]
 
     return content
@@ -137,7 +142,7 @@ def SimpleWrite(fn, content):
     try:
         fd = open(fn, "w")
     except:
-        print("Failed to open file: %s for writting\n"%(fn))
+        print("Failed to open file: %s for writting\n" % (fn))
         print sys.exc_info()[1]
         return False
     else:
@@ -146,30 +151,34 @@ def SimpleWrite(fn, content):
         fd.close()
         return True
 
+
 def remove_if(lst, ele):
     while ele in lst:
         lst.remove(ele)
+
 
 class DesktopEntry:
     """
     DesktopEntry representation.
     """
 
-    def __init__(self, path):
+    def __init__(self, path, internal=False):
         """
         """
         self.Category = None
-        self.Name     = None
-        self.Icon     = None
-        self.Exec     = None
+        self.Name = None
+        self.Icon = None
+        self.Exec = None
 
         # Optional
         self.terminal = False
 
-        self.IsValid  = True
+        self.IsValid = True
         self.InVisiable = True
-        self.path = path;
-        self._parse(path)
+        self.FvwmInternal = internal
+        self.path = path
+        if not self.FvwmInternal:
+            self._parse(path)
 
     def _parse(self, path):
         """
@@ -199,7 +208,6 @@ class DesktopEntry:
         tname = tmp_dic.get("Name")
         self.Name = tname[0].upper() + tname[1:];
         self.Exec = tmp_dic.get("Exec")
-
 
         if self.Name is None or self.Exec is None:
             self.IsValid = False
@@ -235,7 +243,7 @@ class DesktopEntry:
             self.Category = "MultiMedia"
         elif "Windows" in self.Name or "Microsoft" in self.Name or \
              "cxoffice" in self.Name or "cxmenu" in self.Category or \
-             "cross"    in self.Name.lower():
+             "cross" in self.Name.lower():
             self.Category = "Wine"
         else:
             self.Category = self.Category.split(";")[0]
@@ -243,10 +251,10 @@ class DesktopEntry:
                 self.Category = "Wine"
 
         PDEBUG("Name: %s, Category: %s, path: %s", self.Name, self.Category,
-                                                   self.path)
+               self.path)
 
     def __hash__(self):
-        return self.Name.__hash__();
+        return self.Name.__hash__()
 
     def SerializeToString(self):
         """
@@ -255,19 +263,25 @@ class DesktopEntry:
         2. Return a string which can be inserted into fvwm menu.
         """
 
-        icon_out = g_iconBase.PrepareIcon(self.Icon)
-        return '+ "%%%s%%%s" Exec exec %s\n'%(icon_out, self.Name,
-                                              self.Exec)
+        if self.FvwmInternal:
+            return '+ "%%%s%%%s" %s\n' % (self.Icon, self.Name,
+                                          self.Exec)
+        else:
+            return '+ "%%%s%%%s" Exec exec %s\n' % (
+                g_iconBase.PrepareIcon(self.Icon), self.Name,
+                self.Exec)
+
 
 class DE_Category:
     """
     """
+
     def __init__(self, name):
         """
         """
         self.Name = name
         self.Icon = name + ".png"
-        self.DEs=set()
+        self.DEs = set()
         print "Createing CAT: ", name
         pass
 
@@ -281,12 +295,13 @@ class DE_Category:
         """
         print "Called for: ", self.Name, "Len: ", len(self.DEs)
         icon_out = g_iconBase.PrepareIcon(self.Icon, True)
-        first = '+ "%%%s%%%s" Popup Menu%s\n'%(icon_out, self.Name, self.Name)
-        second = "\nDestroyMenu Menu%s\nAddToMenu Menu%s\n"%(self.Name, self.Name)
+        first = '+ "%%%s%%%s" Popup Menu%s\n' % (icon_out, self.Name, self.Name)
+        second = "\nDestroyMenu Menu%s\nAddToMenu Menu%s\n" % (self.Name, self.Name)
         for de in self.DEs:
             second += de.SerializeToString()
         second += "\n\n"
         return (first, second)
+
 
 class FvwmMenuFactory:
     def __init__(self):
@@ -301,10 +316,10 @@ class FvwmMenuFactory:
         """
         de = DesktopEntry(path)
         if not de.IsValid:
-            print("File %s path is not valid!\n"%path)
+            print("File %s path is not valid!\n" % path)
             return
         if de.InVisiable:
-            print("File :%s is invisible.\n"%path)
+            print("File :%s is invisible.\n" % path)
             return
 
         cat = self.cats.get(de.Category)
@@ -314,9 +329,9 @@ class FvwmMenuFactory:
         self.cats[de.Category].StoreEntry(de)
 
     def OutputToFile(self, of=os.path.join(FVWM_HOME, "Menu")):
-        output   = SimpleRead(menu_template_head)
+        output = SimpleRead(menu_template_head)
         submenus = []
-        keys = self.cats.keys();
+        keys = self.cats.keys()
         keys.sort()
         for key in keys:
             cat = self.cats.get(key)
@@ -330,6 +345,7 @@ class FvwmMenuFactory:
             output += sm + "\n"
         SimpleWrite(of, output)
 
+
 def process_desktop_entries(menu, dirname, filenames):
     """
     Parse each file in this subdir, store information into fvwm_menu;
@@ -341,6 +357,7 @@ def process_desktop_entries(menu, dirname, filenames):
         else:
             menu.Feed(path)
 
+
 if __name__ == '__main__':
 
     menu = FvwmMenuFactory()
@@ -349,4 +366,12 @@ if __name__ == '__main__':
     for item in DESKTOP_SEARCH_PATH:
         os.path.walk(item, process_desktop_entries, menu)
     print ("Finished analyze desktop entries.\n")
+
+    de = DesktopEntry(None, True)
+    de.Category = 'Utilities'
+    de.Name = 'Update Menu'
+    de.Icon = '%s/.fvwm/icons/actions/update.png'%os.getenv("HOME")
+    de.Exec = 'FuncUpdateMenu'
+
+    menu.cats['Utilities'].StoreEntry(de)
     menu.OutputToFile()
