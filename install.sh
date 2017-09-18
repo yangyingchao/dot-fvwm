@@ -38,6 +38,7 @@ my_link()
 }
 
 my_link ${TOP}/.fvwm ~/.fvwm
+my_link ${TOP}/.gtkrc-2.0.mine ~/.gtkrc-2.0.mine
 
 for item in ${TOP}/config/*; do
     my_link $item ~/.config/`basename $item`
