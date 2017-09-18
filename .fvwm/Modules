@@ -190,8 +190,7 @@ DestroyModuleConfig TaskBarIcons:*
 *TaskBarIcons: SelectColorSet 51
 *TaskBarIcons: FocusAndSelectColorSet 53
 *TaskBarIcons: Action Mouse 1 A sendcommand FuncIconManClick
-*TaskBarIcons: Action Mouse 2 A sendcommand WarpToWindow
-*TaskBarIcons: Action Mouse 3 A sendcommand "Module FvwmIdent FvwmIdent"
+*TaskBarIcons: Action Mouse 3 A sendcommand "Menu MenuWindowOptions"
 
 
 # button actions
