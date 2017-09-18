@@ -117,7 +117,7 @@ AddToFunc OnBottomEdge
 
 ###########################################################
 # Colorsets
-p###########################################################
+###########################################################
 
 Colorset 1 fg white, bg black, sh black, hi black, fgsh white
 Colorset 2 fg #ffffff, bg #000000, sh #000000, hi #000000
