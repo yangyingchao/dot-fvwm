@@ -10,7 +10,7 @@ Key 4 A S4 MoveToDesk 0 3
 Key space A 4 Exec synapse
 Key space A M Iconify
 Key F1 A 4 Exec pcmanfm
-Key F2 A 4 Exec devhelp
+Key F2 A 4 Exec thunderbird
 Key F8 A 4 Module FvwmConsole
 Key F11 A 4 Exec firefox-bin
 Key F12 A 4 Exec google-chrome-stable
