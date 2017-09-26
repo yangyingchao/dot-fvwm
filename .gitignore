@@ -5,3 +5,4 @@ GRTAGS
 /.fvwm/.FvwmConsole-History
 /config/rime/luna_pinyin.userdb/*.log
 /config/rime/luna_pinyin.userdb/MANIFEST*
+config/rime/luna_pinyin.userdb/
