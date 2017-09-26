@@ -261,18 +261,18 @@ Style xfreerdp !Title
 Style rdesktop !Title
 Style RemotePC NoTitle, Sticky, WindowListSkip, CirculateSkipIcon, CirculateSkip, BorderWidth 1, BorderColorset 5, NoHandles, NeverFocus, StaysOnBottom
 Style RemotePC PositionPlacement 80 52
+
 # Classified apps.
 Style emacs StartsOnDesk 0
 Style sakura StartsOnDesk 0
 Style Pidgin StartsOnDesk 0
 
 # # Wined apps
-# Style Wine StartsOnDesk 2
-# Style VirtualBox StartsOnDesk 2
-# Style Audacious StartsOnDesk 2
+Style Thunderbird StartsOnDesk 1
+Style Main StartsOnDesk 1
 
 # Remote desktops & Entainments.
 Style rdesktop StartsOnDesk 3
 Style xfreerdp StartsOnDesk 3
 Style Remmina StartsOnDesk 3
-Style vmware StartsOnDesk 3
+Style Vmware-view StartsOnDesk 3
