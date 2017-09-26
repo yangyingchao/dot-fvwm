@@ -7,7 +7,7 @@ if [ $? -eq 0 ]; then
     notify-send "Conky hash been started."
     exit 1
 fi
-notify-send "Starting conky!"
+
 cpu_num=`cat /proc/cpuinfo | grep processor | wc -l`
 if [ $cpu_num -gt 1 ]; then
     cat $HOME/.fvwm/tools/conky_head.tpl > $HOME/.conkyrc
