@@ -177,7 +177,7 @@ DestroyModuleConfig TaskBarIcons:*
 *TaskBarIcons: MaxButtonWidth 200
 *TaskBarIcons: ManagerGeometry 2x1+0+0
 *TaskBarIcons: DrawIcons always
-*TaskBarIcons: ReliefThickness 1
+*TaskBarIcons: ReliefThickness 0
 *TaskBarIcons: Title ""
 *TaskBarIcons: Fromat "%t"
 *TaskBarIcons: IconButton down
