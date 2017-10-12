@@ -1,6 +1,6 @@
 [Hotkey]
 # 切换激活/非激活输入法
-TriggerKey=SHIFT_SUPER_SPACE
+TriggerKey=CTRL_SHIFT_SPACE
 # 只在用额外切换键取消激活后才使用它进行切换
 # Available Value:
 # True False
