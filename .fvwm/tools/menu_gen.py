@@ -2,10 +2,9 @@
 # -*- coding: utf-8 -*-
 
 import os
-from os.path import walk
 import sys
-from copy import deepcopy
 import traceback
+import functools
 
 
 def PDEBUG(fmt, *args):
@@ -44,8 +43,17 @@ class ImageCollection:
             if os.path.islink(path):
                 path = os.path.abspath(path)
             PDEBUG('Collecting icons from: %s', path)
-            os.path.walk(path, self._collect, None)
-        print "Finished icon collection, size: ", len(self.img_data)
+            for dirpath, dirnames, filenames in os.walk(path):
+                for res in ['16', '22', '24', '32', 'scalable']:
+                    if res in dirnames:
+                        dirnames.remove(res)
+
+                for fn in filenames:
+                    path = os.path.join(dirpath, fn)
+                    key = fn.split(".")[0].lower()
+                    self.img_data[key] = path
+
+        print ("Finished icon collection, size: %d" % len(self.img_data))
 
     def PrepareIcon(self, name, isCat=False):
         if name is None:
@@ -90,25 +98,6 @@ class ImageCollection:
 
         return icon_out
 
-    def _collect(self, arg, dirname, filenames):
-        # TODO: This should be optimized by analyzing "index.theme" file.
-        size = len(filenames)
-        for i in range(size):
-            idx = size - 1 - i
-            fn = filenames[idx]
-            if fn.find("16/") != -1 or fn.find("22/") != -1 or \
-               fn.find("32/") != -1 or fn.find("24/") != -1 or \
-               fn == "scalable":
-                filenames.pop(idx)
-                continue
-
-            path = os.path.join(dirname, fn)
-            if os.path.isdir(path):
-                continue
-
-            key = fn.split(".")[0].lower()
-            self.img_data[key] = path
-
 
 g_iconBase = ImageCollection(["/usr/share/pixmaps", "/usr/share/icons/hicolor",
                               os.path.join(USER_HOME, ".icons/default"),
@@ -126,7 +115,7 @@ def SimpleRead(fn):
         content = open(fn).read()
     except:
         print("Failed to read file: %s\n" % (fn))
-        print sys.exc_info()[1]
+        print("%s" % sys.exc_info()[1])
 
     return content
 
@@ -143,7 +132,7 @@ def SimpleWrite(fn, content):
         fd = open(fn, "w")
     except:
         print("Failed to open file: %s for writting\n" % (fn))
-        print sys.exc_info()[1]
+        print("%s" % sys.exc_info()[1])
         return False
     else:
         fd.truncate(0)
@@ -157,6 +146,7 @@ def remove_if(lst, ele):
         lst.remove(ele)
 
 
+@functools.total_ordering
 class DesktopEntry:
     """
     DesktopEntry representation.
@@ -206,7 +196,7 @@ class DesktopEntry:
 
         self.Icon = tmp_dic.get("Icon")
         tname = tmp_dic.get("Name")
-        self.Name = tname[0].upper() + tname[1:];
+        self.Name = tname[0].upper() + tname[1:]
         self.Exec = tmp_dic.get("Exec")
 
         if self.Name is None or self.Exec is None:
@@ -271,6 +261,11 @@ class DesktopEntry:
                 g_iconBase.PrepareIcon(self.Icon), self.Name,
                 self.Exec)
 
+    def __lt__(self, other):
+        return self.Name < other.Name
+
+    def __eq__(self, other):
+        return self.Name == other.Name
 
 class DE_Category:
     """
@@ -282,7 +277,7 @@ class DE_Category:
         self.Name = name
         self.Icon = name + ".png"
         self.DEs = set()
-        print "Createing CAT: ", name
+        print("Createing CAT: %s" % name)
         pass
 
     def StoreEntry(self, de):
@@ -293,11 +288,11 @@ class DE_Category:
         First part is the entry to be added to MenuFvwmRoot.
         Second part is menu definition of this category.
         """
-        print "Called for: ", self.Name, "Len: ", len(self.DEs)
+        print("Called for: ", self.Name, "Len: ", len(self.DEs))
         icon_out = g_iconBase.PrepareIcon(self.Icon, True)
         first = '+ "%%%s%%%s" Popup Menu%s\n' % (icon_out, self.Name, self.Name)
         second = "\nDestroyMenu Menu%s\nAddToMenu Menu%s\n" % (self.Name, self.Name)
-        for de in self.DEs:
+        for de in sorted(self.DEs):
             second += de.SerializeToString()
         second += "\n\n"
         return (first, second)
@@ -331,8 +326,7 @@ class FvwmMenuFactory:
     def OutputToFile(self, of=os.path.join(FVWM_HOME, "Menu")):
         output = SimpleRead(menu_template_head)
         submenus = []
-        keys = self.cats.keys()
-        keys.sort()
+        keys = sorted(self.cats.keys())
         for key in keys:
             cat = self.cats.get(key)
             content = cat.SerializeToString()
@@ -364,13 +358,17 @@ if __name__ == '__main__':
 
     print ("Searching and analyzing desktop entries...")
     for item in DESKTOP_SEARCH_PATH:
-        os.path.walk(item, process_desktop_entries, menu)
+        for root, dirs, files in os.walk(item):
+            for fn in files:
+                if not fn.endswith('desktop'):
+                    continue
+                menu.Feed(os.path.join(root, fn))
     print ("Finished analyze desktop entries.\n")
 
     de = DesktopEntry(None, True)
     de.Category = 'Utilities'
     de.Name = 'Update Menu'
-    de.Icon = '%s/.fvwm/icons/actions/update.png'%os.getenv("HOME")
+    de.Icon = '%s/.fvwm/icons/actions/update.png' % os.getenv("HOME")
     de.Exec = 'FuncUpdateMenu'
 
     menu.cats['Utilities'].StoreEntry(de)
