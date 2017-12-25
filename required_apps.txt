@@ -1,1 +1,1 @@
-fvwm habak xcompmgr lxterminal urxvtwmclock stalonetray grun
+fvwm habak xcompmgr rxvt-unicode stalonetray synapse nm-applet fcitx
