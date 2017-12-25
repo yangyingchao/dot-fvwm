@@ -311,10 +311,10 @@ class FvwmMenuFactory:
         """
         de = DesktopEntry(path)
         if not de.IsValid:
-            print("File %s path is not valid!\n" % path)
+            print("File %s path is not valid!" % path)
             return
         if de.InVisiable:
-            print("File :%s is invisible.\n" % path)
+            print("File %s is invisible." % path)
             return
 
         cat = self.cats.get(de.Category)
