@@ -185,10 +185,16 @@ class DesktopEntry:
 
         content = content.split("\n")
         tmp_dic = {}
+        keys = set()
         for item in content:
             kvp = item.split("=")
             if len(kvp) == 2:
-                tmp_dic[kvp[0]] = kvp[1]
+                k = kvp[0]
+                v = kvp[1]
+                if k in keys:
+                    continue
+                keys.add(k)
+                tmp_dic[k] = v
 
         self.InVisiable = tmp_dic.get("NoDisplay")
         if self.InVisiable:
