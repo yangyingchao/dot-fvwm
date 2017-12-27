@@ -44,7 +44,7 @@ class ImageCollection:
                 path = os.path.abspath(path)
             PDEBUG('Collecting icons from: %s', path)
             for dirpath, dirnames, filenames in os.walk(path):
-                for res in ['16', '22', '24', '32', 'scalable']:
+                for res in ['16', '22', '24', '32']:
                     if res in dirnames:
                         dirnames.remove(res)
 
