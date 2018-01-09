@@ -1,1 +1,1 @@
-fvwm habak xcompmgr rxvt-unicode stalonetray synapse nm-applet fcitx
+fvwm habak xcompmgr rxvt-unicode stalonetray synapse nm-applet fcitx gnome-settings-daemon
