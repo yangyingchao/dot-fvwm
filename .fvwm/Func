@@ -144,15 +144,6 @@ Key L A 4 FuncFvwmLockScreen
 Key L A CM FuncFvwmLockScreen
 
 
-# Set the specified wallpaper using available programs
-DestroyFunc Wallpaper-Set
-AddToFunc Wallpaper-Set
-+ I Test (x habak) Exec habak -ms $*
-+ I TestRc (False) Test (x Esetroot) Exec Esetroot -scale $*
-+ I TestRc (False) Test (x hsetroot) Exec hsetroot -fill $*
-+ I SavePreferences LastChoosenWallpaper "Wallpaper-Set \"$*\""
-
-
 DestroyFunc StartFunction
 AddToFunc   StartFunction
 +           I Module FvwmAnimate
@@ -165,7 +156,7 @@ AddToFunc   StartFunction
 +           I Test (Init) Exec exec fcitx &
 +           I Test (Init) Exec exec nm-applet &
 +           I Test (Init) Exec exec synapse -s &
-+           I Test (Init) Exec exec xscreensaver &
++           I Test (Init) Exec exec xautolock -time 3 -locker "i3lock -n -c 2d3435"
 +           I Test (Init) FuncStartSysTray
 +           I Test (Init) FuncStartSysTrayApplets
 +           I Module FvwmButtons FvwmDock
